@@ -1,0 +1,29 @@
+/* _content/CPSC481/Shared/CategoryCard.razor.rz.scp.css */
+
+/* _content/CPSC481/Shared/MainLayout.razor.rz.scp.css */
+.page[b-yrtfgc1hi2] {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	font-family: "Poppins", sans-serif;
+}
+
+main[b-yrtfgc1hi2] {
+	flex: 1;
+	font-family: "Poppins", sans-serif;
+}
+/* _content/CPSC481/Shared/Navbar.razor.rz.scp.css */
+.navbar[b-uo7iy2g7kk] {
+	display: flex;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.navbar__item[b-uo7iy2g7kk] {
+}
+
+.navbar__item--primary[b-uo7iy2g7kk] {
+}
+
+.navbar__item--secondary[b-uo7iy2g7kk] {
+}
