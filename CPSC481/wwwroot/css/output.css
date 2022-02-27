@@ -588,11 +588,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(28 93 153 / var(--tw-bg-opacity));
 }
 
-.bg-green {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 184 101 / var(--tw-bg-opacity));
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -649,14 +644,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 150ms;
 }
 
-.hover\:bg-blue2:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 123 203 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-cream2:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(238 232 210 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-blue2:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 123 203 / var(--tw-bg-opacity));
 }
 
 .hover\:text-cream:hover {
