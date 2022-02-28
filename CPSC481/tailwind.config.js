@@ -17,6 +17,7 @@ module.exports = {
 				green: "#00b865",
 				cream: "#f3efe0",
 				cream2: "#eee8d2",
+				cream3: "#e3d9b6",
 				black: "#353535",
 			},
 		},
