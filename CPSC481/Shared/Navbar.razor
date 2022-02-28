@@ -1,13 +1,27 @@
-<nav class="flex p-2 flex-row justify-center items-center">
+<nav class="fixed top-0 z-20 w-full flex flex-row justify-center items-center bg-cream shadow-md">
 	<div class="w-3/4 max-w-full flex flex-row justify-between items-center">
 		<a href="/">
 			<img src="images/Bookie-Logo.png" width="70" height="70" />
 		</a>
-		<div class="flex flex-row items-center gap-2">
-			<button class="p-2 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Sign Up</button>
-			<button
-				class="p-2 rounded bg-cream hover:bg-blue2 transition-all hover:text-cream text-center text-lg text-black">Log
-				in</button>
-		</div>
+		@if (name == null)
+		{
+			<div class="flex flex-row items-center gap-2">
+				<button class="p-2 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Sign Up</button>
+				<button class="p-2 rounded bg-cream hover:bg-cream3 transition-all text-center text-lg text-black">Log
+					in</button>
+			</div>
+		}
+		else
+		{
+			<div class="flex flex-row justify-center items-center gap-x-4">
+				<DropMenu name=@name />
+				<img src="images/profile-user.png" width="30" height="30" />
+			</div>
+		}
 	</div>
 </nav>
+
+@code {
+	[Parameter]
+	public string? name { get; set; } = null;
+}
