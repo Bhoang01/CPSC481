@@ -1,0 +1,93 @@
+@inject NavigationManager NavManager
+
+<div class="flex flex-col w-full justify-center items-center p-2">
+	<div class="flex flex-row h-full w-3/4">
+
+		<div class="flex flex-col w-1/5 p-2">
+			<div>
+				<h3 class="text-xl font-medium">Filters</h3>
+			</div>
+			<div class="flex flex-col mt-8 gap-y-2">
+				<div class="flex flex-row justify-between items-center">
+					<p class="text-md">Current Location: </p>
+					<p class="font-medium">@location</p>
+				</div>
+
+				<div class="flex flex-col justify-start items-start">
+					<p class="text-md">Price: </p>
+					<div class="flex w-full flex-row justify-between items-center mt-1">
+						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
+							placeholder="Min Price" @bind="minPrice" @bind:event="oninput" />
+						<p>to</p>
+
+						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
+							placeholder="Max Price" @bind="maxPrice" @bind:event="oninput" />
+					</div>
+				</div>
+
+				<div class="flex flex-col justify-start items-start">
+					<p class="text-md">People: </p>
+					<div class="flex w-full flex-row justify-between items-center mt-1">
+						<input type="range" class="w-24" min="1" max="20" @bind="people" />
+						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
+							placeholder="# People" @bind="people" @bind:event="oninput" />
+					</div>
+				</div>
+
+				<div class="flex flex-col justify-start items-start">
+					<p class="text-md">Age: </p>
+					<div class="flex w-full flex-row justify-between items-center mt-1">
+						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
+							placeholder="Min Age" @bind="minAge" @bind:event="oninput" />
+						<p>to</p>
+						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
+							placeholder="Max Age" @bind="maxAge" @bind:event="oninput" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="flex flex-col w-4/5 p-2">
+			<p>@location</p>
+		</div>
+
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string location { get; set; } = String.Empty;
+	private string? category;
+	private int? minPrice;
+	private int? maxPrice;
+	private int? people;
+	private int? rating;
+	private int? minAge;
+	private int? maxAge;
+	private bool? childFriendly;
+	private bool? adultsOnly;
+
+	protected override void OnInitialized()
+	{
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("category", out var _category))
+			category = Convert.ToString(_category);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("minPrice", out var _minPrice))
+			minPrice = Convert.ToInt32(_minPrice);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("maxPrice", out var _maxPrice))
+			maxPrice = Convert.ToInt32(_maxPrice);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("people", out var _people))
+			people = Convert.ToInt32(_people);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("rating", out var _rating))
+			rating = Convert.ToInt32(_rating);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("minAge", out var _minAge))
+			minAge = Convert.ToInt32(_minAge);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("maxAge", out var _maxAge))
+			maxAge = Convert.ToInt32(_maxAge);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("childFriendly", out var _childFriendly))
+			childFriendly = bool.Parse(_childFriendly);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("adultsOnly", out var _adultsOnly))
+			adultsOnly = bool.Parse(_adultsOnly);
+	}
+}
