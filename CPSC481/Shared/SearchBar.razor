@@ -1,19 +1,20 @@
 @inject NavigationManager NavManager
 
-<div class="w-3/4 p-1 flex flex-row justify-between items-center rounded border-2 border-black">
-	<input class="p-2 focus:outline-none bg-cream text-black border-none text-xl w-3/4" type="text"
-		placeholder="@Placeholder" @bind="query" @bind:event="oninput" />
-	<button class="p-2 rounded bg-blue text-cream text-xl w-1/4 hover:bg-blue2 transition-all"
-		@onclick="onClick">Search</button>
-</div>
+<form class="w-3/4 p-1 flex flex-row justify-between items-center rounded border-2 border-black">
+	<input class="p-2 focus:outline-none bg-cream text-black border-none text-xl w-3/4" type="text" placeholder="@example"
+		@bind="query" @bind:event="oninput" />
+	<button type="submit" class="p-2 rounded bg-blue text-cream text-xl w-1/4 hover:bg-blue2 transition-all"
+		@onclick="onClick" @onclick:preventDefault @onkeypress="onClick" @onkeypress:preventDefault>Search</button>
+</form>
 
 @code {
 	[Parameter]
-	public string Placeholder { get; set; } = String.Empty;
+	public string example { get; set; } = String.Empty;
 
 	private string query = String.Empty;
 	void onClick()
 	{
+		if (query == String.Empty) return;
 		var newPath = "/search?location=" + query;
 		NavManager.NavigateTo(newPath);
 	}
