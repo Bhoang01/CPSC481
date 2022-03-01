@@ -1,0 +1,60 @@
+@page "/search"
+@inject NavigationManager NavManager
+
+<PageTitle>Search :: @location</PageTitle>
+
+@if (isValidQuery)
+{
+	<p>@location</p>
+}
+else
+{
+	<p>INVALID</p>
+}
+
+@code {
+
+	private string? location;
+	private string? category;
+	private int? price;
+	private int? people;
+	private int? rating;
+	private int? minAge;
+	private int? maxAge;
+	private bool? childFriendly;
+	private bool? adultsOnly;
+	private bool isValidQuery = true;
+	protected override void OnInitialized()
+	{
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("location", out var _location))
+			location = Convert.ToString(_location);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("category", out var _category))
+			category = Convert.ToString(_category);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("price", out var _price))
+			price = Convert.ToInt32(_price);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("people", out var _people))
+			people = Convert.ToInt32(_people);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("rating", out var _rating))
+			rating = Convert.ToInt32(_rating);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("minAge", out var _minAge))
+			minAge = Convert.ToInt32(_minAge);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("maxAge", out var _maxAge))
+			maxAge = Convert.ToInt32(_maxAge);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("childFriendly", out var _childFriendly))
+			childFriendly = bool.Parse(_childFriendly);
+
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("adultsOnly", out var _adultsOnly))
+			adultsOnly = bool.Parse(_adultsOnly);
+
+		if (location == null) isValidQuery = false;
+	}
+}
