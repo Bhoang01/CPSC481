@@ -1,0 +1,120 @@
+<div class="flex flex-col w-1/5 p-2">
+	<div>
+		<h3 class="text-xl font-medium">Filters</h3>
+	</div>
+	<div class="flex flex-col mt-8 gap-y-2">
+		<div class="flex flex-row justify-between items-center">
+			<p class="text-md">Current Location: </p>
+			<p class="font-medium">@location</p>
+		</div>
+
+		<div class="flex flex-col justify-start items-start">
+			<p class="text-md">Price: </p>
+			<div class="flex w-full flex-row justify-between items-center mt-1">
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="Min Price" @bind="minPrice" @bind:event="oninput" />
+				<p>to</p>
+
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="Max Price" @bind="maxPrice" @bind:event="oninput" />
+			</div>
+		</div>
+
+		<div class="flex flex-col justify-start items-start">
+			<p class="text-md">People: </p>
+			<div class="flex w-full flex-row justify-between items-center mt-1">
+				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
+					min="1" max="20" @bind="people" />
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="# People" @bind="people" @bind:event="oninput" />
+			</div>
+		</div>
+
+		<div class="flex flex-col justify-start items-start">
+			<p class="text-md">Rating: </p>
+			<div class="flex w-full flex-row justify-between items-center mt-1">
+				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
+					min="1" max="5" @bind="rating" />
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="Rating" @bind="rating" @bind:event="oninput" />
+			</div>
+		</div>
+
+		<div class="flex flex-col justify-start items-start">
+			<p class="text-md">Age: </p>
+			<div class="flex w-full flex-row justify-between items-center mt-1">
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="Min Age" @bind="minAge" @bind:event="oninput" />
+				<p>to</p>
+				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
+					placeholder="Max Age" @bind="maxAge" @bind:event="oninput" />
+			</div>
+		</div>
+
+		<div class="flex flex-row justify-start items-center gap-x-4">
+			@if (childFriendly)
+			{
+				<input type="checkbox" class="" checked />
+			}
+			else
+			{
+				<input type="checkbox" class="" />
+			}
+			<p class="text-md">Child Friendly</p>
+		</div>
+
+		<div class="flex flex-row justify-start items-center gap-x-4">
+			@if (adultsOnly)
+			{
+				<input type="checkbox" class="" checked />
+			}
+			else
+			{
+				<input type="checkbox" class="" />
+			}
+			<p class="text-md">Adults Only</p>
+		</div>
+
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string location { get; set; } = String.Empty;
+	[Parameter]
+	public string? category { get; set; }
+	[Parameter]
+	public int? minPrice { get; set; }
+	[Parameter]
+	public int? maxPrice { get; set; }
+	[Parameter]
+	public int? people { get; set; }
+	[Parameter]
+	public int? rating { get; set; }
+	[Parameter]
+	public int? minAge { get; set; }
+	[Parameter]
+	public int? maxAge { get; set; }
+	[Parameter]
+	public bool childFriendly { get; set; }
+	[Parameter]
+	public bool adultsOnly { get; set; }
+
+	protected override void OnInitialized()
+	{
+		if (category == String.Empty)
+			category = null;
+		if (minPrice == -1)
+			minPrice = null;
+		if (maxPrice == -1)
+			maxPrice = null;
+		if (people == -1)
+			people = null;
+		if (rating == -1)
+			rating = null;
+		if (minAge == -1)
+			minAge = null;
+		if (maxAge == -1)
+			maxAge = null;
+	}
+}

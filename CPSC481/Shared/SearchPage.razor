@@ -3,50 +3,8 @@
 <div class="flex flex-col w-full justify-center items-center p-2">
 	<div class="flex flex-row h-full w-3/4">
 
-		<div class="flex flex-col w-1/5 p-2">
-			<div>
-				<h3 class="text-xl font-medium">Filters</h3>
-			</div>
-			<div class="flex flex-col mt-8 gap-y-2">
-				<div class="flex flex-row justify-between items-center">
-					<p class="text-md">Current Location: </p>
-					<p class="font-medium">@location</p>
-				</div>
-
-				<div class="flex flex-col justify-start items-start">
-					<p class="text-md">Price: </p>
-					<div class="flex w-full flex-row justify-between items-center mt-1">
-						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
-							placeholder="Min Price" @bind="minPrice" @bind:event="oninput" />
-						<p>to</p>
-
-						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
-							placeholder="Max Price" @bind="maxPrice" @bind:event="oninput" />
-					</div>
-				</div>
-
-				<div class="flex flex-col justify-start items-start">
-					<p class="text-md">People: </p>
-					<div class="flex w-full flex-row justify-between items-center mt-1">
-						<input type="range" class="w-24" min="1" max="20" @bind="people" />
-						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
-							placeholder="# People" @bind="people" @bind:event="oninput" />
-					</div>
-				</div>
-
-				<div class="flex flex-col justify-start items-start">
-					<p class="text-md">Age: </p>
-					<div class="flex w-full flex-row justify-between items-center mt-1">
-						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
-							placeholder="Min Age" @bind="minAge" @bind:event="oninput" />
-						<p>to</p>
-						<input type="number" class="p-1 w-24 focus:outline-none bg-cream border-black rounded border-2"
-							placeholder="Max Age" @bind="maxAge" @bind:event="oninput" />
-					</div>
-				</div>
-
-			</div>
-		</div>
+		<FilterPanel location="@location" category="@category" minPrice="@minPrice" maxPrice="@maxPrice" people="@people"
+			rating="@rating" minAge="@minAge" maxAge="@maxAge" childFriendly="@childFriendly" adultsOnly="@adultsOnly" />
 
 		<div class="flex flex-col w-4/5 p-2">
 			<p>@location</p>
@@ -58,15 +16,15 @@
 @code {
 	[Parameter]
 	public string location { get; set; } = String.Empty;
-	private string? category;
-	private int? minPrice;
-	private int? maxPrice;
-	private int? people;
-	private int? rating;
-	private int? minAge;
-	private int? maxAge;
-	private bool? childFriendly;
-	private bool? adultsOnly;
+	private string category = String.Empty;
+	private int minPrice = -1;
+	private int maxPrice = -1;
+	private int people = -1;
+	private int rating = -1;
+	private int minAge = -1;
+	private int maxAge = -1;
+	private bool childFriendly = false;
+	private bool adultsOnly = false;
 
 	protected override void OnInitialized()
 	{
