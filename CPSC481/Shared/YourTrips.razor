@@ -1,0 +1,52 @@
+<div class="flex max-w-full p-2 flex-col justify-center items-center mt-4">
+	<div class="w-3/4 flex flex-col">
+		<div class="flex flex-col mt-4">
+			@*<p class="text-xl text-center font-bold text-black">Current Trip: Toronto 2022</p>*@
+			<button
+				class="flex flex-col justify-center text-black hover:shadow-lg focus:outline-none font-medium text-xl rounded p-2 text-center inline-flex items-center gap-x-2"
+				@onclick="OnClick">
+				Current Trip: Toronto 2022
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+				</svg>
+			</button>
+
+			@if (isOpen)
+			{
+				<div class = "flex flex-col justify-center items-center" >
+					<div class="bg-cream z-30 p-2 list-none divide-y divide-gray-100 rounded shadow-md mt-1">
+						<ul class="py-2" aria-labelledby="dropdown">
+							<li>
+								<a href="#" class="text-lg text-center hover:bg-cream3 text-black block p-2 rounded">Toronto 2022</a>
+							</li>
+							<li>
+								<a href="#" class="text-lg text-center hover:bg-cream3 text-black block p-2 rounded">Miami 2019</a>
+							</li>
+							<li>
+								<a href="#" class="text-lg text-center hover:bg-cream3 text-black block p-2 rounded">+ ADD TRIP</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			}
+			<div class="flex flex-row hover:basis-1/2 gap-x-8 mt-4">
+				<TripsCard Destination="Toronto 2022" Image="images/Toronto-Sample.png" />
+				<TripsCard Destination="Miami 2019" Image = "images/Miami-Sample.png" />
+				<div class = "pt-20">
+					<div class = "rounded-full hover:bg-cream2">
+						<img src="images/add.png" width="225" height="500"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	bool isOpen = false;
+
+	void OnClick()
+	{
+		isOpen = !isOpen;
+	}
+}
