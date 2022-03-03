@@ -647,6 +647,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16.666667%;
 }
 
+.w-2\/3 {
+  width: 66.666667%;
+}
+
+.w-2\/5 {
+  width: 40%;
+}
+
 .max-w-full {
   max-width: 100%;
 }
@@ -689,6 +697,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .items-start {
   align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
