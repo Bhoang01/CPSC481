@@ -1,3 +1,5 @@
+@inject NavigationManager NavManager
+
 <nav class="fixed top-0 z-20 w-full flex flex-row justify-center items-center bg-cream shadow-md">
 	<div class="w-3/4 max-w-full flex flex-row justify-between items-center">
 		<a href="/">
@@ -6,8 +8,10 @@
 		@if (name == null)
 		{
 			<div class="flex flex-row items-center gap-2">
-				<button class="p-2 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Sign Up</button>
-				<button class="p-2 rounded bg-cream hover:bg-cream3 transition-all text-center text-lg text-black">Log
+				<button class="p-2 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream"
+				@onclick="goToSignUp">Sign Up</button>
+				<button class="p-2 rounded bg-cream hover:bg-cream3 transition-all text-center text-lg text-black"
+				@onclick="goToLogin">Log
 					in</button>
 			</div>
 		}
@@ -24,4 +28,6 @@
 @code {
 	[Parameter]
 	public string? name { get; set; } = null;
+	void goToSignUp() { NavManager.NavigateTo("/signup"); }
+	void goToLogin() { NavManager.NavigateTo("/login"); }
 }
