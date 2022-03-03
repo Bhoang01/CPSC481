@@ -497,6 +497,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 24rem;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.my-64 {
+  margin-top: 16rem;
+  margin-bottom: 16rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -537,6 +547,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 5rem;
 }
 
+.mt-64 {
+  margin-top: 16rem;
+}
+
 .block {
   display: block;
 }
@@ -567,6 +581,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-full {
   height: 100%;
+}
+
+.h-4\/5 {
+  height: 80%;
+}
+
+.h-80 {
+  height: 20rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-96 {
+  height: 24rem;
 }
 
 .max-h-full {
@@ -667,6 +697,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -864,6 +898,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(243 239 224 / var(--tw-text-opacity));
 }
 
+.text-cream3 {
+  --tw-text-opacity: 1;
+  color: rgb(227 217 182 / var(--tw-text-opacity));
+}
+
 .opacity-70 {
   opacity: 0.7;
 }
@@ -895,9 +934,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(37 123 203 / var(--tw-bg-opacity));
 }
 
+.hover\:font-medium:hover {
+  font-weight: 500;
+}
+
 .hover\:text-blue2:hover {
   --tw-text-opacity: 1;
   color: rgb(37 123 203 / var(--tw-text-opacity));
+}
+
+.hover\:text-blue:hover {
+  --tw-text-opacity: 1;
+  color: rgb(28 93 153 / var(--tw-text-opacity));
 }
 
 .hover\:opacity-100:hover {
