@@ -1,13 +1,16 @@
-<div class="flex flex-col justify-self-center self-center justify-center items-center py-6">
-	<div class = "pb-5" >
+<div class=" lex flex-col justify-self-center self-center justify-center items-center py-6">
+	<div class="pb-5">
 		<p class="text-xl text-center font-bold text-black">@Destination</p>
 	</div>
-	<div class = "hover:shadow-2xl rounded-md border-rounded border-2 border-black">
-		<img src="@Image" width="225" height="450"  alt="@Destination icon" />
-		<div class = "bg-cream1 border-t-0 justify-center items-center">
-			<div class="flex flex-col justify-self-center self-center justify-center items-center py-3 gap-y-4">
-				<button class="px-4 py-2 bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream">View Itinerary</button>
-				<button class="px-4 py-2 bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream">Trip Details</button>
+	<div class="rounded-md border-rounded border-2 border-black">
+		<img src="@Image" class="aspect-square group-hover:brightness-75 transition-all rounded-t" width="200"
+			alt="@Destination icon" />
+		<div class="bg-cream border-t-0 justify-center items-center rounded-b-md">
+			<div class="flex flex-col justify-self-center self-center justify-center items-center p-3 gap-y-3">
+				<button class="p-2 bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream rounded">View
+					Itinerary</button>
+				<button class="p-2 bg-cream3 hover:bg-cream2 transition-all text-center text-lg text-black rounded">Trip
+					Details</button>
 			</div>
 		</div>
 	</div>
@@ -20,4 +23,3 @@
 	[Parameter]
 	public string Image { get; set; } = "";
 }
-
