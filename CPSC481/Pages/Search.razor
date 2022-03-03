@@ -1,0 +1,26 @@
+@page "/search"
+@inject NavigationManager NavManager
+
+<PageTitle>Search :: @location</PageTitle>
+
+@if (isValidQuery)
+{
+	<SearchPage location="@location" />
+}
+else
+{
+	<p>INVALID</p>
+}
+
+@code {
+
+	private string? location;
+	private bool isValidQuery = true;
+	protected override void OnInitialized()
+	{
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("location", out var _location))
+			location = Convert.ToString(_location);
+		if (location == null) isValidQuery = false;
+	}
+}

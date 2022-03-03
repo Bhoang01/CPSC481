@@ -1,0 +1,48 @@
+@inject NavigationManager NavManager
+
+<div class="flex flex-col w-full justify-center items-center p-2">
+	<div class="flex flex-row h-full w-3/4">
+		<FilterPanel location="@location" category="@category" minPrice="@minPrice" maxPrice="@maxPrice" people="@people"
+			rating="@rating" minAge="@minAge" maxAge="@maxAge" childFriendly="@childFriendly" adultsOnly="@adultsOnly" />
+		<SearchActivities location="@location" category="@category" minPrice="@minPrice" maxPrice="@maxPrice"
+			people="@people" rating="@rating" minAge="@minAge" maxAge="@maxAge" childFriendly="@childFriendly"
+			adultsOnly="@adultsOnly" />
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string location { get; set; } = String.Empty;
+	private string category = String.Empty;
+	private int minPrice = -1;
+	private int maxPrice = -1;
+	private int people = -1;
+	private int rating = -1;
+	private int minAge = -1;
+	private int maxAge = -1;
+	private bool childFriendly = false;
+	private bool adultsOnly = false;
+
+	protected override void OnInitialized()
+	{
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("category", out var _category))
+			category = Convert.ToString(_category);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("minPrice", out var _minPrice))
+			minPrice = Convert.ToInt32(_minPrice);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("maxPrice", out var _maxPrice))
+			maxPrice = Convert.ToInt32(_maxPrice);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("people", out var _people))
+			people = Convert.ToInt32(_people);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("rating", out var _rating))
+			rating = Convert.ToInt32(_rating);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("minAge", out var _minAge))
+			minAge = Convert.ToInt32(_minAge);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("maxAge", out var _maxAge))
+			maxAge = Convert.ToInt32(_maxAge);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("childFriendly", out var _childFriendly))
+			childFriendly = bool.Parse(_childFriendly);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("adultsOnly", out var _adultsOnly))
+			adultsOnly = bool.Parse(_adultsOnly);
+	}
+}
