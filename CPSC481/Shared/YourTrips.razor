@@ -1,3 +1,5 @@
+@inject NavigationManager NavManager
+
 <div class="flex max-w-full p-2 flex-col justify-center items-center mt-4">
 	<div class="w-3/4 flex flex-col justify-start items-center">
 		<div
@@ -22,7 +24,7 @@
 						<a href="#" class="text-lg hover:bg-cream3 text-black block p-2 rounded">Miami 2019</a>
 					</li>
 					<li>
-						<a href="#" class="text-lg hover:bg-cream3 text-black block p-2 rounded">ADD TRIP +</a>
+						<a href="/starttrip" class="text-lg hover:bg-cream3 text-black block p-2 rounded">ADD TRIP +</a>
 					</li>
 				</ul>
 			</div>
@@ -32,7 +34,8 @@
 			<TripsCard Destination="Miami 2019" Image="images/Miami-Sample.png" />
 			<div class="flex flex-col justify-center items-center p-4">
 				<img src="images/add.png"
-					class="rounded-full border-2 border-black hover:bg-cream3 transition-all cursor-pointer" />
+					class="rounded-full border-2 border-black hover:bg-cream3 transition-all cursor-pointer"
+					@onclick="startTrip" />
 			</div>
 		</div>
 	</div>
@@ -44,5 +47,10 @@
 	void OnClick()
 	{
 		isOpen = !isOpen;
+	}
+
+	void startTrip()
+	{
+		NavManager.NavigateTo("/starttrip");
 	}
 }

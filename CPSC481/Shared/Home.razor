@@ -1,7 +1,10 @@
+@inject NavigationManager NavManager
+
 <div class="flex max-w-full p-2 flex-col justify-center items-center mt-4">
 	<div class="w-3/4 flex flex-col">
 		<div class="w-1/2 flex flex-col justify-self-center self-center justify-center items-center gap-y-4">
-			<button class="p-3 w-1/3 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream">Start Your
+			<button class="p-3 w-1/3 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream"
+				@onclick="onClick">Start Your
 				Trip</button>
 			<p class="p-2 text-black text-lg font-medium">Or Browse by an Activity or a City</p>
 			<SearchBar example="Ex: Toronto" />
@@ -17,3 +20,7 @@
 		</div>
 	</div>
 </div>
+
+@code {
+	void onClick() { NavManager.NavigateTo("/starttrip"); }
+}

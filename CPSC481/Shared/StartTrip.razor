@@ -1,0 +1,38 @@
+<div class="flex flex-col justify-center items-center w-full mt-20">
+	<div class="w-1/2 flex flex-col justify-center items-center gap-y-4">
+		<h3 class="text-3xl font-bold text-black">Start Your Trip</h3>
+		<div class="flex flex-row justify-between items-center w-2/3">
+			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
+				<p class="text-black text-xl font-medium">Trip Name:</p>
+				<input type="text" @bind="name"
+					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
+					placeholder="Toronto 2022" />
+			</div>
+			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
+				<p class="text-black text-xl font-medium">City:</p>
+				<input type="text" @bind="city"
+					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
+					placeholder="Toronto" />
+			</div>
+		</div>
+		<div class="flex flex-row justify-between items-center w-2/3">
+			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
+				<p class="text-black text-xl font-medium">From:</p>
+				<RadzenDatePicker @bind-Value=@from DateFormat="MM-dd-yyyy"
+					class="w-full p-2 focus:outline-none text-xl border-black border-2 rounded" />
+			</div>
+			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
+				<p class="text-black text-xl font-medium">To:</p>
+				<RadzenDatePicker @bind-Value=@to DateFormat="MM-dd-yyyy"
+					class="w-full p-2 focus:outline-none text-xl border-black border-2 rounded" />
+			</div>
+		</div>
+		<button class="p-3 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream">Start
+			Trip</button>
+	</div>
+</div>
+
+@code {
+	string name = String.Empty, city = String.Empty;
+	DateTime? from = DateTime.Today, to = DateTime.Today;
+}
