@@ -1,0 +1,52 @@
+<div class="group flex flex-col transition-all cursor-pointer border-black rounded-md border-2 divide-y-2 divide-black">
+	<div class="w-full">
+		<img src="@url" class="w-full aspect-video" alt="@name image" />
+	</div>
+	<div class="group-hover:bg-cream2 flex flex-col gap-y-2 p-2 justify-start items-start">
+		<p class="text-black text-xl font-medium">@name</p>
+		<div class="flex flex-row w-full justify-between items-center">
+			<div class="flex flex-row items-center justify-center gap-x-1">
+				@for (int i = 0; i < rating; i++)
+				{
+					<img src="images/star.png" width="16" height="16" alt="star" />
+				}
+			</div>
+			<div class="flex flex-row items-center justify-center">
+				@for (int i = 0; i < priceCount(price); i++)
+				{
+					<img src="images/dollar-symbol.png" width="16" height="16" alt="$" />
+				}
+			</div>
+			<div class="p-1 border-black rounded border-2 text-md text-black">@category</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string name { get; set; } = String.Empty;
+	[Parameter]
+	public string url { get; set; } = String.Empty;
+	[Parameter]
+	public int rating { get; set; } = 0;
+	[Parameter]
+	public int price { get; set; } = 0;
+	[Parameter]
+	public string category { get; set; } = String.Empty;
+
+	int priceCount(int price)
+	{
+		if (price > 0 && price < 100)
+		{
+			return 1;
+		}
+		else if (price >= 100 && price < 200)
+		{
+			return 2;
+		}
+		else
+		{
+			return 3;
+		}
+	}
+}
