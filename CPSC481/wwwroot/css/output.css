@@ -492,12 +492,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 20;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
+.mx-96 {
+  margin-left: 24rem;
+  margin-right: 24rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .mt-auto {
@@ -508,12 +509,36 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1rem;
 }
 
+.mt-40 {
+  margin-top: 10rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-7 {
+  margin-top: 1.75rem;
+}
+
 .mt-20 {
   margin-top: 5rem;
 }
 
+.mr-20 {
+  margin-right: 5rem;
+}
+
+.ml-20 {
+  margin-left: 5rem;
+}
+
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .flex {
@@ -584,8 +609,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 25%;
 }
 
-.w-1\/6 {
-  width: 16.666667%;
+.w-20 {
+  width: 5rem;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-80 {
+  width: 20rem;
+}
+
+.w-96 {
+  width: 24rem;
+}
+
+.w-2\/5 {
+  width: 40%;
 }
 
 .max-w-full {
@@ -594,6 +635,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex-1 {
   flex: 1 1 0%;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.basis-1\/4 {
+  flex-basis: 25%;
+}
+
+.basis-1\/2 {
+  flex-basis: 50%;
 }
 
 .cursor-pointer {
@@ -793,6 +846,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: center;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -816,6 +873,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .font-bold {
@@ -869,6 +936,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hover\:opacity-100:hover {
   opacity: 1;
+.hover\:text-blue2:hover {
+  --tw-text-opacity: 1;
+  color: rgb(37 123 203 / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus {
