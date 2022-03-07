@@ -1,0 +1,54 @@
+@inject NavigationManager NavManager
+
+<div class="flex flex-col w-full justify-center items-center p-2">
+	<div class="w-3/4 flex flex-col justify-start items-center gap-y-4">
+		<p class="text-black focus:outline-none font-medium text-3xl">
+			Itinerary for Toronto 2022
+		</p>
+		<div class="flex flex-row justify-around items-center w-3/5">
+			<p class="text-5xl font-bold text-black cursor-pointer">&#8592</p>
+			<p class="text-3xl font-medium text-black">Mar 28</p>
+			<p class="text-5xl font-bold text-black cursor-pointer">&#8594</p>
+		</div>
+		<div class="flex flex-row w-3/5 gap-x-4 h-96">
+			<div class="flex flex-col w-1/3 gap-y-2">
+				<p class="text-xl font-medium text-black">Activities Planned</p>
+				<div class="flex flex-col p-2 border-2 border-black rounded gap-y-4 overflow-y-scroll no-scrollbar">
+					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
+						<p class="text-lg font-medium text-black">iQ Food Co.</p>
+						<div class="flex flex-row items-center justify-between">
+							<p class="text-md text-black">15:00</p>
+							<button
+								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
+						</div>
+					</div>
+					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
+						<p class="text-lg font-medium text-black">High Park</p>
+						<div class="flex flex-row items-center justify-between">
+							<p class="text-md text-black">16:00</p>
+							<button
+								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
+						</div>
+					</div>
+					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
+						<p class="text-lg font-medium text-black">Live music at the Garrison</p>
+						<div class="flex flex-row items-center justify-between">
+							<p class="text-md text-black">17:00</p>
+							<button
+								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flex flex-col w-2/3 gap-y-4">
+				<img src="/images/toronto-city-map.jpeg" class="w-full h-full rounded border-black border-2" />
+			</div>
+		</div>
+		<div class="flex flex-row w-3/5 justify-end items-center gap-x-4">
+			<button class="p-2 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Download
+			</button>
+			<button
+				class="p-2 w-1/4 rounded bg-green hover:bg-green2 transition-all text-center text-lg text-cream">Share</button>
+		</div>
+	</div>
+</div>

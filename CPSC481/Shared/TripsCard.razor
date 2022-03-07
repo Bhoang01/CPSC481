@@ -1,3 +1,5 @@
+@inject NavigationManager NavManager
+
 <div class=" lex flex-col justify-self-center self-center justify-center items-center py-6">
 	<div class="pb-5">
 		<p class="text-xl text-center font-bold text-black">@Destination</p>
@@ -7,8 +9,9 @@
 			alt="@Destination icon" />
 		<div class="bg-cream border-t-0 justify-center items-center rounded-b-md">
 			<div class="flex flex-col justify-self-center self-center justify-center items-center p-3 gap-y-3">
-				<button class="p-2 bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream rounded">View
-					Itinerary</button>
+				<a href="/itinerary"
+					class="p-2 bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream rounded">View
+					Itinerary</a>
 				<button class="p-2 bg-cream3 hover:bg-cream2 transition-all text-center text-lg text-black rounded">Trip
 					Details</button>
 			</div>

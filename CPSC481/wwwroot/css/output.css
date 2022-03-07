@@ -560,6 +560,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 24rem;
 }
 
+.max-h-96 {
+  max-height: 24rem;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -610,6 +614,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-3\/5 {
+  width: 60%;
 }
 
 .w-2\/3 {
@@ -676,12 +684,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: flex-start;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
 }
 
 .gap-4 {
@@ -906,6 +922,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.25rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -978,6 +999,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:bg-cream2:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(238 232 210 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green2:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 223 123 / var(--tw-bg-opacity));
 }
 
 .hover\:font-medium:hover {
