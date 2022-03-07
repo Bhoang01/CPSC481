@@ -1,0 +1,25 @@
+<div class="flex flex-col p-2 border-2 border-black rounded gap-y-2">
+	<div class="flex flex-col justify-start items-start">
+		<div class="flex flex-row items-center gap-x-2">
+			<img src="images/profile-user.png" width="30" height="30" />
+			<p class="text-md font-bold text-black">@name</p>
+		</div>
+		<div class="flex flex-row items-center justify-center gap-x-1">
+			@for (int i = 0; i < rating; i++)
+			{
+				<img src="images/star.png" width="16" height="16" alt="star" />
+			}
+			<p class="text-lg text-black ml-2">@rating / 5</p>
+		</div>
+	</div>
+	<p class="text-md text-black">@content</p>
+</div>
+
+@code {
+	[Parameter]
+	public string name { get; set; } = String.Empty;
+	[Parameter]
+	public int rating { get; set; } = 0;
+	[Parameter]
+	public string content { get; set; } = String.Empty;
+}
