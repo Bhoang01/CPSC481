@@ -772,16 +772,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-bottom-left-radius: 0.375rem;
 }
 
-.rounded-l {
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
-
-.rounded-r {
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
-}
-
 .border-2 {
   border-width: 2px;
 }
@@ -808,6 +798,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(238 232 210 / var(--tw-bg-opacity));
 }
 
+.bg-green {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 184 101 / var(--tw-bg-opacity));
+}
+
 .bg-blue {
   --tw-bg-opacity: 1;
   background-color: rgb(28 93 153 / var(--tw-bg-opacity));
@@ -818,21 +813,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 239 224 / var(--tw-bg-opacity));
 }
 
-.bg-red {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 137 102 / var(--tw-bg-opacity));
-}
-
-.bg-green {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 184 101 / var(--tw-bg-opacity));
-}
-
-.bg-cream3 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(227 217 182 / var(--tw-bg-opacity));
-}
-
 .bg-red2 {
   --tw-bg-opacity: 1;
   background-color: rgb(200 46 0 / var(--tw-bg-opacity));
@@ -841,6 +821,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-green2 {
   --tw-bg-opacity: 1;
   background-color: rgb(0 223 123 / var(--tw-bg-opacity));
+}
+
+.bg-cream3 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(227 217 182 / var(--tw-bg-opacity));
 }
 
 .p-2 {
@@ -939,11 +924,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(243 239 224 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .opacity-70 {
   opacity: 0.7;
 }
@@ -985,21 +965,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(37 123 203 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-cream2:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 232 210 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-red2:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(200 46 0 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-green2:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 223 123 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-red:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 137 102 / var(--tw-bg-opacity));
@@ -1008,6 +973,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:bg-green:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(0 184 101 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-cream2:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 232 210 / var(--tw-bg-opacity));
 }
 
 .hover\:font-medium:hover {
