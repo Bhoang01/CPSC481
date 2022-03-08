@@ -1,0 +1,29 @@
+<div class="flex flex-col w-full justify-center items-center p-2">
+	<div class="w-3/4 flex flex-col justify-start items-start pr-2 gap-y-4">
+		<h2 class="text-2xl font-bold text-black">Emergency Information</h2>
+		<form class="w-1/3 p-1 flex flex-row justify-between items-center rounded border-2 border-black">
+			<input class="p-2 focus:outline-none bg-cream text-black border-none text-lg w-3/4" type="text"
+				placeholder="Ex: Toronto" @bind="city" @bind:event="oninput" />
+			<button type="submit" class="p-2 rounded bg-blue text-cream text-lg w-1/4 hover:bg-blue2 transition-all"
+				@onclick="onClick" @onclick:preventDefault @onkeypress="onClick" @onkeypress:preventDefault>Search</button>
+		</form>
+		@if (String.IsNullOrEmpty(city))
+		{
+			<p class="text-red2 text-sm">Please enter your City.</p>
+		}
+		@if (showInfo)
+		{
+			<p class="text-lg text-black"><span class="font-bold">Police:</span> 911</p>
+			<p class="text-lg text-black"><span class="font-bold">Non-Emergency:</span> 416-808-2222</p>
+			<p class="text-lg text-black"><span class="font-bold">Toronto Emergency Medical Services:</span> 416-392-2000</p>
+			<p class="text-lg text-black"><span class="font-bold">Marine, Air Search & Rescue:</span> 1-800-267-7270</p>
+			<img src="/images/toronto-city-map.jpeg" class="w-1/3 rounded border-black border-2" />
+		}
+	</div>
+</div>
+
+@code {
+	private string city = String.Empty;
+	private bool showInfo = false;
+	void onClick() { showInfo = true; }
+}
