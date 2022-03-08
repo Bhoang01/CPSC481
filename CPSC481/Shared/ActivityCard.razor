@@ -1,4 +1,7 @@
-<div class="group flex flex-col transition-all cursor-pointer border-black rounded-md border-2 divide-y-2 divide-black">
+@inject NavigationManager NavManager
+
+<div class="group flex flex-col transition-all cursor-pointer border-black rounded-md border-2 divide-y-2 divide-black"
+	@onclick="gotoActPage">
 	<div class="w-full">
 		<img src="@url" class="w-full rounded-t aspect-video group-hover:brightness-75" alt="@name image" />
 	</div>
@@ -34,6 +37,7 @@
 	[Parameter]
 	public string category { get; set; } = String.Empty;
 
+	void gotoActPage() { NavManager.NavigateTo("/activity/1"); }
 	int priceCount(int price)
 	{
 		if (price > 0 && price < 100)
