@@ -560,10 +560,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 24rem;
 }
 
-.max-h-96 {
-  max-height: 24rem;
-}
-
 .max-h-full {
   max-height: 100%;
 }
