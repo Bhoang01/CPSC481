@@ -20,17 +20,26 @@
 			<div class="w-full text-center border-b-2 border-black">
 				<p class="text-lg font-medium text-black">Existing Trips</p>
 			</div>
-			<div class="flex flex-col gap-y-1 justify-start items-start">
-				<div class="p-2 bg-cream hover:bg-cream3 transition-all rounded" @onclick="() => setTrip(0)">
-					<p class="text-md text-black cursor-pointer">Toronto 2022</p>
-				</div>
-				<div class="p-2 bg-cream hover:bg-cream3 transition-all rounded" @onclick="() => setTrip(1)">
-					<p class="text-md text-black cursor-pointer">Miami 2019</p>
-				</div>
-				<div class="p-2 bg-cream hover:bg-cream3 transition-all rounded" @onclick="addTrip">
-					<p class="text-md text-black cursor-pointer">ADD TRIP +</p>
-				</div>
-			</div>
+			<ul class="flex flex-col gap-y-1 justify-center items-center w-full">
+				<li class="p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
+				@onclick="() => setTrip(0)">
+					<p class="text-md text-black">Toronto 2022</p>
+				</li>
+				<li class="p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
+				@onclick="() => setTrip(1)">
+					<p class="text-md text-black">Miami 2019</p>
+				</li>
+				<li
+				class="flex flex-row justify-center items-center gap-x-2 p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
+				@onclick="addTrip">
+					<p class="text-md text-black">ADD TRIP</p>
+					<svg version="1.1" id="Capa_1" class="h-4 w-4 text-black" viewBox="0 0 27.963 27.963"
+					style="enable-background:new 0 0 27.963 27.963;" xml:space="preserve">
+						<path
+						d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981 C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z" />
+					</svg>
+				</li>
+			</ul>
 		</div>
 	}
 	@if (step == 2)
