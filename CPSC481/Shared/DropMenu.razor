@@ -2,10 +2,11 @@
 	class="bg-cream text-base z-50 p-2 list-none rounded select-none border-2 @(isOpen ? "mt-40 border-black shadow-xl" : "border-cream")">
 	<ul class="">
 		<li
-			class="text-black hover:bg-cream3 focus:outline-none font-medium text-lg rounded p-1 px-2 cursor-pointer text-center inline-flex items-center gap-x-2 @(isOpen ? "bg-cream3" : "")"
+			class="text-black hover:bg-cream3 focus:outline-none font-medium text-lg select-none rounded p-1 px-2 cursor-pointer text-center inline-flex items-center gap-x-2 @(isOpen ? "bg-cream3" : "")"
 			@onclick=" OnClick">
 			Hi, @name
-			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<svg class="w-4 h-4 @(isOpen ? "rotate-180":"")" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 			</svg>
 		</li>

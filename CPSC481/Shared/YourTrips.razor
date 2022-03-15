@@ -3,32 +3,43 @@
 <div class="flex max-w-full p-2 flex-col justify-center items-center mt-4">
 	<div class="w-3/4 flex flex-col justify-start items-center">
 		<div
-			class="flex flex-row justify-center items-center hover:bg-cream3 rounded p-2 gap-x-2 w-auto cursor-pointer transition-all"
-			@onclick="OnClick">
-			<p class="text-black focus:outline-none font-medium text-lg">
-				Current Trip: Toronto 2022
-			</p>
-			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-			</svg>
-		</div>
+			class="fixed bg-cream border-2 border-black z-50 rounded p-2 select-none @(isOpen ? "border-black shadow-xl" : "border-cream")">
+			<ul class="py-2" aria-labelledby="dropdown">
+				<li
+					class="text-black hover:bg-cream3 focus:outline-none font-medium text-lg rounded p-1 px-2 cursor-pointer text-center inline-flex items-center gap-x-2 @(isOpen ? "bg-cream3" : "")"
+					@onclick="OnClick">
+					Current Trip: Toronto 2022
+					<svg class="w-4 h-4 @(isOpen ? "rotate-180":"")" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+					</svg>
+				</li>
 
-		@if (isOpen)
-		{
-			<div class="self-center fixed bg-cream border-2 border-black text-base z-50 p-2 list-none rounded shadow-md mt-12">
-				<ul class="py-2" aria-labelledby="dropdown">
+				@if (isOpen)
+				{
 					<li>
-						<a href="#" class="text-lg hover:bg-cream3 text-black block p-2 rounded">Toronto 2022</a>
+						<a href="#"
+						class="text-lg hover:bg-cream3 text-black text-center block p-1 px-2 cursor-pointer rounded select-none mt-2">Toronto
+							2022</a>
 					</li>
 					<li>
-						<a href="#" class="text-lg hover:bg-cream3 text-black block p-2 rounded">Miami 2019</a>
+						<a href="#"
+						class="text-lg hover:bg-cream3 text-black text-center block p-1 px-2 cursor-pointer rounded select-none mt-2">Miami
+							2019</a>
 					</li>
 					<li>
-						<a href="/starttrip" class="text-lg hover:bg-cream3 text-black block p-2 rounded">ADD TRIP +</a>
-					</li>
-				</ul>
-			</div>
-		}
+					<a href="/starttrip"
+						class=" flex flex-row justify-center items-center gap-x-2 font-bold text-lg hover:bg-cream3 text-black text-center p-1 px-2 cursor-pointer rounded select-none mt-2">ADD
+						TRIP
+						<svg version="1.1" id="Capa_1" class="h-4 w-4 text-black" viewBox="0 0 27.963 27.963"
+							style="enable-background:new 0 0 27.963 27.963;" xml:space="preserve">
+							<path
+								d="M13.98,0C6.259,0,0,6.26,0,13.982s6.259,13.981,13.98,13.981c7.725,0,13.983-6.26,13.983-13.981 C27.963,6.26,21.705,0,13.98,0z M21.102,16.059h-4.939v5.042h-4.299v-5.042H6.862V11.76h5.001v-4.9h4.299v4.9h4.939v4.299H21.102z" />
+						</svg></a>
+				</li>
+				}
+			</ul>
+		</div>
 		<div class="grid grid-cols-5 gap-6 mt-4">
 			<TripsCard Destination="Toronto 2022" Image="images/Toronto-Sample.png" />
 			<TripsCard Destination="Miami 2019" Image="images/Miami-Sample.png" />
