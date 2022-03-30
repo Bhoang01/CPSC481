@@ -1,20 +1,22 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex flex-col w-full justify-center items-center p-2">
 	<div class="flex flex-col h-full w-3/4 p-2 gap-y-4">
 		<button class="p-3 w-1/6 rounded bg-cream2 hover:bg-cream3 transition-all text-center text-xl text-black"
 			@onclick="onClick">Back</button>
 		<div class="flex flex-row h-full w-full gap-x-4">
-			<ActivitySection title="iQ Food Co." rating="4" price="20"
-				address="181 Bay Street, Toronto, Ontario M5J 2V1 Canada" category="Food" />
+			<ActivitySection id="@id" />
 			<AddToTripSection />
 		</div>
 	</div>
 </div>
 
 @code {
+	[Parameter]
+	public int id { get; set; } = 0;
 	void onClick()
 	{
-		NavManager.NavigateTo("/search?location=Toronto");
+		NavManager.NavigateTo(StateContainer.searchURL == null ? "/" : StateContainer.searchURL);
 	}
 }

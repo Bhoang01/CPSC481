@@ -1,4 +1,6 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
+@using CPSC481.Classes
 
 <div class="flex flex-col w-4/5 p-2 pl-4 gap-y-3 max-h-full">
 	<h3 class="text-xl font-medium">Search Activity</h3>
@@ -18,25 +20,14 @@
 	</div>
 	<h3 class="text-xl font-medium">Results</h3>
 	<div class="grid gap-4 grid-cols-4 w-full">
-		<ActivityCard name="iQ Food Co."
-			url="https://media-cdn.tripadvisor.com/media/photo-s/0e/6f/e2/69/iq-brookfield-place.jpg" rating="4" price="15"
-			category="Food" />
-		<ActivityCard name="CN Tower"
-			url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/ae/78/cn-tower.jpg?w=1400&h=-1&s=1" rating="3"
-			price="100" category="Landmark" />
-		<ActivityCard name="Ripley's aquarium"
-			url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/34/b0/8a/entrance.jpg?w=1600&h=-1&s=1" rating="4"
-			price="45" category="Landmark" />
-		<ActivityCard name="The Butcher Chef" url="https://resizer.otstatic.com/v2/photos/xlarge/3/28373710.jpg" rating="5"
-			price="200" category="Food" />
-		<ActivityCard name="CN Tower"
-			url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/ae/78/cn-tower.jpg?w=1400&h=-1&s=1" rating="3"
-			price="100" category="Landmark" />
-		<ActivityCard name="Ripley's aquarium"
-			url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/34/b0/8a/entrance.jpg?w=1600&h=-1&s=1" rating="4"
-			price="45" category="Landmark" />
-		<ActivityCard name="The Butcher Chef" url="https://resizer.otstatic.com/v2/photos/xlarge/3/28373710.jpg" rating="5"
-			price="200" category="Food" />
+		@if (activities.Length > 0)
+		{
+			@foreach (Item a in activities)
+			{
+				<ActivityCard id="@a.id" name="@a.name" url="@a.images[0]" rating="@a.rating" price="@a.price"
+			category="@a.category" />
+			}
+		}
 	</div>
 </div>
 
@@ -62,6 +53,7 @@
 	[Parameter]
 	public bool adultsOnly { get; set; }
 	private string query = String.Empty;
+	private Item[] activities = Array.Empty<Item>();
 	void onClick()
 	{
 		if (query == String.Empty) return;
@@ -73,6 +65,10 @@
 
 	protected override void OnInitialized()
 	{
+		activities = StateContainer.getActivities(location, minPrice, maxPrice, people, rating, minAge, maxAge, category,
+		adultsOnly, childFriendly);
+		Console.WriteLine(StateContainer.searchURL);
+
 		if (category == String.Empty)
 			category = null;
 		if (minPrice == -1)

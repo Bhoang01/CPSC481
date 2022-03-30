@@ -29,16 +29,18 @@
 	[Parameter]
 	public string name { get; set; } = String.Empty;
 	[Parameter]
+	public int id { get; set; } = 0;
+	[Parameter]
 	public string url { get; set; } = String.Empty;
 	[Parameter]
-	public int rating { get; set; } = 0;
+	public double rating { get; set; } = 0.0;
 	[Parameter]
-	public int price { get; set; } = 0;
+	public double price { get; set; } = 0.0;
 	[Parameter]
 	public string category { get; set; } = String.Empty;
 
-	void gotoActPage() { NavManager.NavigateTo("/activity/1"); }
-	int priceCount(int price)
+	void gotoActPage() { NavManager.NavigateTo($"/activity/{id}"); }
+	double priceCount(double price)
 	{
 		if (price > 0 && price < 100)
 		{

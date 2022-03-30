@@ -1,4 +1,4 @@
-﻿@inject StateContainer StateContainer
+﻿@inject CPSC481.Classes.StateContainer StateContainer
 @inject NavigationManager NavManager
 
 <div class="flex flex-col h-96 justify-center items-center w-full mt-20">
@@ -59,8 +59,6 @@
 	private string? emailError = null;
 	private string password { get; set; } = String.Empty;
 	private string? passwordError = null;
-
-	private string formState = "INITIAL";
 	private string? formError = null;
 	private void login()
 	{
@@ -89,7 +87,6 @@
 			}
 			else
 			{
-				formState = "ERROR";
 				formError = error;
 			}
 		}

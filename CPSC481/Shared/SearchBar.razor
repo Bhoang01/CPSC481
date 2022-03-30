@@ -15,7 +15,8 @@
 	void onClick()
 	{
 		if (query == String.Empty) return;
-		var newPath = "/search?location=" + query;
+		var newPath =
+		$"/search?location={query}&minPrice=0&maxPrice=9999&people=0&rating=0&minAge=0&maxAge=999&isAdult=False&isChild=False";
 		NavManager.NavigateTo(newPath);
 	}
 }

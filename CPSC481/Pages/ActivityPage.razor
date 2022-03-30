@@ -1,7 +1,10 @@
 @page "/activity/{id:int}"
-<PageTitle>Bookie :: iQ Food Co.</PageTitle>
-<Activity />
+@inject CPSC481.Classes.StateContainer StateContainer
+
+<PageTitle>Bookie :: @StateContainer.getActivityName(id)</PageTitle>
+<Activity id="@id" />
 @code {
 	[Parameter]
-	public int id { get; set; } = -1;
+	public int id { get; set; } = 0;
+
 }
