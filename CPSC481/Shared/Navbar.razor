@@ -1,3 +1,4 @@
+@inject StateContainer StateContainer
 @inject NavigationManager NavManager
 
 <nav class="fixed top-0 z-20 w-full h-16 flex flex-row justify-center items-center bg-cream shadow-md">
@@ -5,7 +6,7 @@
 		<a href="/">
 			<img src="images/Bookie-Logo.png" width="70" height="70" />
 		</a>
-		@if (name == null)
+		@if (!StateContainer.isLoggedIn())
 		{
 			<div class="flex flex-row items-center gap-2">
 				<button class="p-2 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream"
@@ -18,16 +19,21 @@
 		else
 		{
 			<div class="flex flex-row justify-center items-center gap-x-4">
-				<DropMenu name=@name />
-				@* <img src="images/profile-user.png" width="30" height="30" /> *@
+				<DropMenu name="@StateContainer.getFirstName()" />
 			</div>
 		}
 	</div>
 </nav>
 
 @code {
-	[Parameter]
-	public string? name { get; set; } = null;
+	protected override void OnInitialized()
+	{
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
+	}
 	void goToSignUp() { NavManager.NavigateTo("/signup"); }
 	void goToLogin() { NavManager.NavigateTo("/login"); }
 }

@@ -1,43 +1,182 @@
-﻿<div class="flex flex-col h-96 justify-center items-center w-full mt-20">
-	<div class="w-1/2 flex flex-col justify-center items-center gap-y-4">
-		<div class="flex flex-row justify-between items-center w-2/3">
-			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
-				<p class="text-black text-xl font-medium">First Name:</p>
-				<input type="text"
-					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="John" />
+﻿@inject StateContainer StateContainer
+@inject NavigationManager NavManager
+
+<div class="flex flex-col h-96 justify-center items-center w-full mt-20">
+
+	<div class="w-[36rem] flex flex-col justify-center items-center">
+		<h2 class="text-4xl text-black font-bold pb-4">Sign Up</h2>
+		@if (formError != null)
+		{
+			<div class="p-4 rounded bg-red w-full flex justify-center items-center text-secondary font-medium text-lg">
+				@formError
 			</div>
-			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
-				<p class="text-black text-xl font-medium">Password:</p>
+		}
+		<div class="w-full grid grid-cols-2 gap-x-8 pt-4">
+			<div class="flex flex-col justify-start items-start">
+				<p class="text-black text-lg font-medium">First Name:</p>
+				<input type="text"
+					class="w-full p-2 focus:outline-none bg-secondary-2 text-black text-lg border-black border-2 rounded"
+					placeholder="Your first name" @bind="firstName" @bind:event="oninput" />
+				@if (firstNameError != null)
+				{
+					<p class="text-red text-sm font-medium">@firstNameError</p>
+				}
+				else
+				{
+					<p class="text-secondary select-none text-sm font-medium">.</p>
+				}
+			</div>
+			<div class="flex flex-col justify-start items-start">
+				<p class="text-black text-lg font-medium">Password:</p>
 				<input type="password"
-					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="password" />
+					class="w-full p-2 focus:outline-none bg-secondary-2 text-black text-lg border-black border-2 rounded"
+					placeholder="Your password" @bind="password" @bind:event="oninput" />
+				@if (passwordError != null)
+				{
+					<p class="text-red text-sm font-medium">@passwordError</p>
+				}
+				else
+				{
+					<p class="text-secondary select-none text-sm font-medium">.</p>
+				}
 			</div>
 		</div>
-		<div class="flex flex-row justify-between items-center w-2/3">
-			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
-				<p class="text-black text-xl font-medium">Last Name:</p>
+
+		<div class="w-full grid grid-cols-2 gap-x-8">
+			<div class="flex flex-col justify-start items-start">
+				<p class="text-black text-lg font-medium">Last Name:</p>
 				<input type="text"
-					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="Doe" />
+					class="w-full p-2 focus:outline-none bg-secondary-2 text-black text-lg border-black border-2 rounded"
+					placeholder="Your last name" @bind="lastName" @bind:event="oninput" />
+				@if (lastNameError != null)
+				{
+					<p class="text-red text-sm font-medium">@lastNameError</p>
+				}
+				else
+				{
+					<p class="text-secondary select-none text-sm font-medium">.</p>
+				}
 			</div>
-			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
-				<p class="text-black text-xl font-medium">Confirm Password:</p>
+			<div class="flex flex-col justify-start items-start">
+				<p class="text-black text-lg font-medium">Confirm Password:</p>
 				<input type="password"
-					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="password" />
+					class="w-full p-2 focus:outline-none bg-secondary-2 text-black text-lg border-black border-2 rounded"
+					placeholder="Confirm password" @bind="confirmPassword" @bind:event="oninput" />
+				@if (confirmPasswordError != null)
+				{
+					<p class="text-red text-sm font-medium">@confirmPasswordError</p>
+				}
+				else
+				{
+					<p class="text-secondary select-none text-sm font-medium">.</p>
+				}
 			</div>
 		</div>
-		<div class="flex flex-row justify-between items-end w-2/3">
-			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
-				<p class="text-black text-xl font-medium">Email:</p>
-				<input type="password"
-					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="example@gmail.com" />
+		<div class="w-full grid grid-cols-2 gap-x-8">
+			<div class="flex flex-col justify-start items-start">
+				<p class="text-black text-lg font-medium">Email:</p>
+				<input type="email"
+					class="w-full p-2 focus:outline-none bg-secondary-2 text-black text-lg border-black border-2 rounded"
+					placeholder="Your email" @bind="email" @bind:event="oninput" />
+				@if (emailError != null)
+				{
+					<p class="text-red text-sm font-medium">@emailError</p>
+				}
+				else
+				{
+					<p class="text-secondary select-none text-sm font-medium">.</p>
+				}
 			</div>
-			<button class="p-3 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream">Sign
-				Up</button>
+			<div class="w-full flex justify-end items-end pb-[1.25rem]">
+				<button
+					class="w-full h-12 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-secondary"
+					@onclick="signup">Sign Up</button>
+			</div>
 		</div>
 
 	</div>
+
 </div>
+
+@code {
+	protected override void OnInitialized()
+	{
+		if (StateContainer.isLoggedIn())
+		{
+			NavManager.NavigateTo("/");
+		}
+	}
+	private string firstName { get; set; } = String.Empty;
+	private string? firstNameError = null;
+	private string lastName { get; set; } = String.Empty;
+	private string? lastNameError = null;
+	private string email { get; set; } = String.Empty;
+	private string? emailError = null;
+	private string password { get; set; } = String.Empty;
+	private string? passwordError = null;
+	private string confirmPassword { get; set; } = String.Empty;
+	private string? confirmPasswordError = null;
+	private string formState = "INITIAL";
+	private string? formError = null;
+	private void signup()
+	{
+		if (firstName.Length < 1)
+		{
+			firstNameError = "First name is required";
+		}
+		else
+		{
+			firstNameError = null;
+		}
+		if (lastName.Length < 1)
+		{
+			lastNameError = "Last name is required";
+		}
+		else
+		{
+			lastNameError = null;
+		}
+		if (email.Length < 1)
+		{
+			emailError = "Email is required";
+		}
+		else
+		{
+			emailError = null;
+		}
+		if (password.Length < 1)
+		{
+			passwordError = "Password is required";
+		}
+		else
+		{
+			passwordError = null;
+		}
+		if (confirmPassword.Length < 1)
+		{
+			confirmPasswordError = "Confirm password is required";
+		}
+		else
+		{
+			confirmPasswordError = null;
+		}
+		if (password != confirmPassword)
+		{
+			confirmPasswordError = "Passwords do not match";
+		}
+		if (firstNameError == null && lastNameError == null && emailError == null && passwordError == null &&
+		confirmPasswordError == null)
+		{
+			string? error = StateContainer.signup(firstName, lastName, email, password);
+			if (error == null)
+			{
+				NavManager.NavigateTo("/");
+			}
+			else
+			{
+				formState = "ERROR";
+				formError = error;
+			}
+		}
+	}
+}

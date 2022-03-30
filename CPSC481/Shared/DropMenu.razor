@@ -1,8 +1,10 @@
+@inject StateContainer StateContainer
+
 <div
-	class="bg-cream text-base z-50 p-2 list-none rounded select-none border-2 @(isOpen ? "mt-40 border-black shadow-xl" : "border-cream")">
-	<ul class="">
+	class="bg-cream text-base z-50 p-2 list-none rounded select-none border-2 w-48 @(isOpen ? "mt-40 border-black shadow-xl" : "border-cream")">
+	<ul class="w-full">
 		<li
-			class="text-black hover:bg-cream3 focus:outline-none font-medium text-lg select-none rounded p-1 px-2 cursor-pointer text-center inline-flex items-center gap-x-2 @(isOpen ? "bg-cream3" : "")"
+			class="w-full flex flex-row justify-center items-center text-black hover:bg-cream3 focus:outline-none font-medium text-lg select-none rounded p-1 px-2 cursor-pointer text-center gap-x-2 @(isOpen ? "bg-cream3" : "")"
 			@onclick=" OnClick">
 			Hi, @name
 			<svg class="w-4 h-4 @(isOpen ? "rotate-180":"")" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -14,20 +16,22 @@
 		{
 			<li>
 				<a href="/favorites"
-				class="text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Favorites</a>
+				class="w-full text-center text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Favorites</a>
 			</li>
 			<li>
 				<a href="/trips"
-				class="text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Your Trips</a>
+				class="w-full text-center text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Your
+					Trips</a>
 			</li>
 			<li>
 				<a href="/emergency"
-				class="text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Emergency</a>
+				class="w-full text-center text-lg hover:bg-cream3 text-black block p-1 px-2 cursor-pointer rounded select-none mt-1">Emergency</a>
 			</li>
 			<li>
-			<a href="#" class="text-lg hover:bg-cream3 text-black block p-1 rounded px-2 cursor-pointer select-none mt-1">Sign
-				out</a>
-		</li>
+				<button @onclick="logout"
+				class="w-full text-center text-lg hover:bg-cream3 text-black block p-1 rounded px-2 cursor-pointer select-none mt-1">Sign
+					out</button>
+			</li>
 		}
 	</ul>
 </div>
@@ -36,9 +40,24 @@
 	[Parameter]
 	public string name { get; set; } = "";
 	bool isOpen = false;
-
+	protected override void OnInitialized()
+	{
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
+	}
 	void OnClick()
 	{
 		isOpen = !isOpen;
+	}
+	void logout()
+	{
+		Console.WriteLine("Logged out.");
+		bool success = StateContainer.logout();
+		if (success)
+			isOpen = false;
+
 	}
 }
