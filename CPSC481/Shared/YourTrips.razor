@@ -2,21 +2,31 @@
 @inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex w-full p-2 flex-col justify-center items-center mt-4">
-	<div class="w-2/3 grid grid-cols-5 gap-6">
-		@if (trips != null)
-		{
+	<h2 class="text-black text-4xl font-bold pb-8">Your Trips</h2>
+	@if (trips != null && trips.Length > 0)
+	{
+		<div class="w-2/3 grid grid-cols-5 gap-6">
 			@foreach (Trip t in trips)
 			{
 				<TripsCard id="@t.id" />
 			}
 
-		}
-		<div class="flex flex-col justify-center items-center p-4">
-			<img src="images/add.png"
+			<div class="flex flex-col justify-center items-center p-4">
+				<img src="images/add.png"
 				class="rounded-full border-2 border-black hover:bg-secondary-3 transition-all cursor-pointer"
 				@onclick="startTrip" />
+			</div>
 		</div>
-	</div>
+	}
+	else
+	{
+		<p class="text-black text-lg font-medium">You don't have any trips.</p>
+		<div class="flex flex-col justify-center items-center p-4 w-36">
+			<img src="images/add.png"
+			class="rounded-full border-2 border-black hover:bg-secondary-3 transition-all cursor-pointer"
+			@onclick="startTrip" />
+		</div>
+	}
 </div>
 
 @code {
