@@ -4,7 +4,7 @@
 	<div class="flex flex-row w-full min-h-full border-2 border-black rounded p-4 justify-between items-start gap-x-4">
 		<div class="flex flex-col justify-start items-start w-1/3 gap-y-2">
 			<div class="flex flex-col w-full justify-center items-center">
-				<img src="@activity.images[currImage]" class="w-full rounded aspect-video" alt="@activity.name image" />
+				<img src="@activity?.images[currImage]" class="w-full rounded aspect-video" alt="@activity?.name image" />
 				<div class="flex flex-row justify-between items-center w-4/5">
 					<p class="text-2xl font-bold text-black cursor-pointer select-none" @onclick="cycleImageBack">&#8592</p>
 					<p class="text-lg font-bold text-black">gallery</p>
@@ -14,34 +14,34 @@
 			<div class="flex flex-col items-start justify-start">
 				<p class="text-lg text-black font-bold">Rating:</p>
 				<div class="flex flex-row items-center justify-center gap-x-1">
-					@for (int i = 0; i < activity.rating; i++)
+					@for (int i = 0; i < activity?.rating; i++)
 					{
 						<img src="images/star.png" width="16" height="16" alt="star" />
 					}
-					<p class="text-lg text-black ml-2">@activity.rating.ToString("0.##") / 5</p>
+					<p class="text-lg text-black ml-2">@activity?.rating.ToString("0.##") / 5</p>
 				</div>
 			</div>
 			<div class="flex flex-col items-start justify-start gap-y-1">
 				<p class="text-lg text-black font-bold">Price:</p>
-				<p>$@activity.price / Person</p>
+				<p>$@activity?.price / Person</p>
 			</div>
 			<div class="flex flex-col items-start justify-start gap-y-1">
 				<p class="text-lg text-black font-bold">Address:</p>
-				<p>@activity.address</p>
+				<p>@activity?.address</p>
 			</div>
 			<div class="flex flex-col items-start justify-start gap-y-1">
 				<p class="text-lg text-black font-bold">Category:</p>
-				<p>@activity.category</p>
+				<p>@activity?.category</p>
 			</div>
 		</div>
-		<div class="flex flex-col justify-start items-start w-1/3 gap-y-4">
-			<h3 class="text-xl font-medium text-black">@activity.name</h3>
-			<p class="text-lg text-black">@activity.description</p>
+		<div class="flex flex-col justify-start items-start gap-y-4">
+			<h3 class="text-xl font-medium text-black">@activity?.name</h3>
+			<p class="text-lg text-black">@activity?.description</p>
 		</div>
-		<div class="w-full flex flex-col justify-start items-start w-1/3 gap-y-4">
+		<div class="flex flex-col justify-start items-start gap-y-4">
 			<h4 class="text-xl text-black font-medium">Reviews</h4>
 			<div class="w-full flex flex-col justify-center items-center overflow-y-scroll gap-y-4 no-scrollbar">
-				@foreach (ItemReview r in activity.reviews)
+				@foreach (ItemReview r in activity?.reviews)
 				{
 					<Review name="@r.name" rating="@r.rating" content="@r.comment" />
 				}

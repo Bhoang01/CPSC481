@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
+using System.Text.Json;
 namespace CPSC481.Classes
 {
 	public class StateContainer
@@ -10,6 +7,9 @@ namespace CPSC481.Classes
 		private User? currentUser = null;
 		private List<Item> activities = new List<Item>();
 		public string? searchURL;
+		public bool loaded = false;
+
+
 		public bool isLoggedIn() => currentUser != null;
 		public string? getFirstName() => currentUser?.firstName;
 		public string? signup(string firstName, string lastName, string email, string password)
@@ -25,7 +25,7 @@ namespace CPSC481.Classes
 		public string? login(string email, string password)
 		{
 			if (currentUser != null) return "You are already signed in";
-			User? user = users.FirstOrDefault(u => u.email == email && u.password == password);
+			User? user = users.FirstOrDefault(u => u.email == email && u.isPasswordValid(password));
 			if (user == null) return "Invalid email or password";
 			currentUser = user;
 			NotifyStateChanged();
@@ -38,7 +38,7 @@ namespace CPSC481.Classes
 			NotifyStateChanged();
 			return true;
 		}
-		public Item[] getActivities(string city, int? minPrice, int? maxPrice, int? people, double? rating, int? minAge, int? maxAge, string category, bool isAdult, bool isChild)
+		public Item[] getActivities(string city, int? minPrice, int? maxPrice, int? people, double? rating, int? minAge, int? maxAge, string? category, bool isAdult, bool isChild)
 		{
 			searchURL = $"/search?location={city}&minPrice={minPrice}&maxPrice={maxPrice}&people={people}&rating={rating}&minAge={minAge}&maxAge={maxAge}&isAdult={isAdult}&isChild={isChild}&category={category}";
 			List<Item> filteredActivities = new List<Item>();
@@ -49,7 +49,7 @@ namespace CPSC481.Classes
 				if (activity.people < people) continue;
 				if (activity.rating < rating) continue;
 				if (activity.minAge > minAge || activity.maxAge > maxAge) continue;
-				if (category != String.Empty && activity.category.ToLower() != category.ToLower()) continue;
+				if (category != String.Empty && activity.category.ToLower() != category?.ToLower()) continue;
 				if (isAdult && activity.minAge < 18) continue;
 				if (isChild && activity.maxAge > 18) continue;
 				filteredActivities.Add(activity);
@@ -66,11 +66,64 @@ namespace CPSC481.Classes
 			if (activity == null) return null;
 			return activity.name;
 		}
+		public bool addTrip(string name, DateTime startDate, DateTime endDate, string city)
+		{
+			if (currentUser == null) return false;
+			currentUser.addTrip(name, startDate, endDate, city);
+			NotifyStateChanged();
+			return true;
+		}
+
+		public string[]? getTripNames()
+		{
+			if (currentUser == null) return null;
+			return currentUser.getTripNames();
+		}
+
+		public bool setActiveTrip(string? name)
+		{
+			if (currentUser == null || name == null) return false;
+			NotifyStateChanged();
+			return currentUser.setActiveTrip(name);
+		}
+
+		public bool isActiveTrip()
+		{
+			if (currentUser == null) return false;
+			return currentUser.isActiveTrip();
+		}
+		public bool isActiveTrip(int id)
+		{
+			if (currentUser == null) return false;
+			return currentUser.isActiveTrip(id);
+		}
+
+		public Trip? getActiveTrip()
+		{
+			if (currentUser == null) return null;
+			return currentUser.getActiveTrip();
+		}
+
+		public Trip? getTripDetails(int id)
+		{
+			if (currentUser == null) return null;
+			return currentUser.getTripDetails(id);
+		}
+
+		public Trip[]? getTrips()
+		{
+			if (currentUser == null) return null;
+			return currentUser.getTrips();
+		}
+
 		public event Action? OnChange;
 		private void NotifyStateChanged() => OnChange?.Invoke();
 		public StateContainer()
 		{
-			users.Add(new User("Zeyad", "Omran", "zeyad@bookie.com", "1234"));
+			User user = new User("Zeyad", "Omran", "zeyad@bookie.com", "1234");
+			user.addTrip("London 2020", new DateTime(2020, 1, 1), new DateTime(2020, 1, 12), "London");
+			user.addTrip("Tokyo 2021", new DateTime(2021, 1, 1), new DateTime(2021, 1, 12), "Tokyo");
+			users.Add(user);
 			users.Add(new User("Briana", "Hoang", "briana@bookie.com", "1234"));
 			users.Add(new User("Youstina", "Attia", "youstina@bookie.com", "1234"));
 			users.Add(new User("Vi", "Tsang", "vi@bookie.com", "1234"));
