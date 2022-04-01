@@ -2,9 +2,10 @@ public class Trip
 {
 	public int id;
 	private string name;
-	private DateTime startDate;
-	private DateTime endDate;
+	public DateTime startDate;
+	public DateTime endDate;
 	private string city;
+	private TripItinerary itinerary = new TripItinerary();
 
 	public Trip(int id, string name, DateTime startDate, DateTime endDate, string city)
 	{
@@ -30,5 +31,22 @@ public class Trip
 	public string getFormatedEndDate()
 	{
 		return endDate.ToString("MM-dd-yyyy");
+	}
+
+	public bool addToItinerary(Item activity, DateTime startDate, string startTime, DateTime endDate, string endTime)
+	{
+		if (startDate.CompareTo(this.startDate) == -1 || endDate.CompareTo(this.endDate) == 1) return false;
+		if (startDate.CompareTo(this.endDate) == 1 || endDate.CompareTo(this.startDate) == -1) return false;
+		return itinerary.addActivity(activity, startDate, startTime, endDate, endTime);
+	}
+
+	public bool removeFromItinerary(Item activity)
+	{
+		return itinerary.removeActivity(activity);
+	}
+
+	public ItemFormat[] getItinerary()
+	{
+		return itinerary.getActivities();
 	}
 }

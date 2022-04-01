@@ -1,54 +1,159 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex flex-col w-full justify-center items-center p-2">
 	<div class="w-3/4 flex flex-col justify-start items-center gap-y-4">
 		<p class="text-black focus:outline-none font-medium text-3xl">
-			Itinerary for Toronto 2022
+			Itinerary for @trip?.getName()
 		</p>
-		<div class="flex flex-row justify-around items-center w-3/5">
-			<p class="text-5xl font-bold text-black cursor-pointer">&#8592</p>
-			<p class="text-3xl font-medium text-black">Mar 28</p>
-			<p class="text-5xl font-bold text-black cursor-pointer">&#8594</p>
-		</div>
-		<div class="flex flex-row w-3/5 gap-x-4 h-96">
+		@if (tripsExist)
+		{
+			<div class="flex flex-row justify-around items-center w-3/5">
+				<p class="text-5xl font-bold text-black cursor-pointer select-none" @onclick="previousDate">&#8592</p>
+				<p class="text-3xl font-medium text-black">@date.ToString("MMM dd")</p>
+				<p class="text-5xl font-bold text-black cursor-pointer select-none" @onclick="nextDate">&#8594</p>
+			</div>
+			<div class="flex flex-row w-3/5 gap-x-4 h-96">
 			<div class="flex flex-col w-1/3 gap-y-2">
 				<p class="text-xl font-medium text-black">Activities Planned</p>
 				<div class="flex flex-col p-2 border-2 border-black rounded gap-y-4 overflow-y-scroll no-scrollbar">
-					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
-						<p class="text-lg font-medium text-black">iQ Food Co.</p>
-						<div class="flex flex-row items-center justify-between">
-							<p class="text-md text-black">15:00</p>
-							<button
+					@foreach (ItemFormat item in getItemsToday())
+						{
+							<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
+								<p class="text-lg font-medium text-black">@item.activity.name</p>
+								<div class="flex flex-row items-center justify-between">
+									<div class="text-sm text-black w-full flex justify-start gap-x-4">
+										<p class="font-bold">Start Time: </p>
+										<p>@item.startTime</p>
+									</div>
+									<button
 								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
-						</div>
-					</div>
-					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
-						<p class="text-lg font-medium text-black">High Park</p>
-						<div class="flex flex-row items-center justify-between">
-							<p class="text-md text-black">16:00</p>
-							<button
-								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
-						</div>
-					</div>
-					<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
-						<p class="text-lg font-medium text-black">Live music at the Garrison</p>
-						<div class="flex flex-row items-center justify-between">
-							<p class="text-md text-black">17:00</p>
-							<button
-								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
-						</div>
+								</div>
+							</div>
+						}
 					</div>
 				</div>
+				<div class="flex flex-col w-2/3 gap-y-4">
+					<RadzenGoogleMap class="w-full h-full rounded border-black border-2" Center=@(new GoogleMapPosition() { Lat =
+					getItemsToday()[0].activity.latitude, Lng = getItemsToday()[0].activity.longitude }) Data=@markers />
+				</div>
 			</div>
-			<div class="flex flex-col w-2/3 gap-y-4">
-				<img src="/images/toronto-city-map.jpeg" class="w-full h-full rounded border-black border-2" />
-			</div>
-		</div>
-		<div class="flex flex-row w-3/5 justify-end items-center gap-x-4">
+			<div class="flex flex-row w-3/5 justify-end items-center gap-x-4">
 			<button class="p-2 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Download
 			</button>
 			<button
 				class="p-2 w-1/4 rounded bg-green hover:bg-green2 transition-all text-center text-lg text-cream">Share</button>
 		</div>
+		}
+		else
+		{
+			<p class="text-md text-black font-medium pt-32">Please add something to the itinerary to view this page.</p>
+		}
 	</div>
 </div>
+
+@code {
+	[Parameter]
+	public int id { get; set; }
+	ItemFormat[] items = Array.Empty<ItemFormat>();
+	Trip? trip;
+	List<DateTime> dates = new List<DateTime>();
+	int count;
+	DateTime date = DateTime.Now;
+	IList<RadzenGoogleMapMarker> markers = new List<RadzenGoogleMapMarker>();
+	bool tripsExist = false;
+
+	protected override void OnInitialized()
+	{
+		if (!StateContainer.isLoggedIn())
+		{
+			NavManager.NavigateTo("/login");
+			return;
+		}
+
+		items = StateContainer.getItinerary(id) ?? Array.Empty<ItemFormat>();
+		trip = StateContainer.getTripDetails(id);
+		StateContainer.OnChange += StateHasChanged;
+		formatDates();
+		count = 0;
+		if (dates.Count > 0)
+		{
+			date = dates.First();
+			tripsExist = true;
+		}
+		getMarkers();
+	}
+
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
+	}
+
+	void getMarkers()
+	{
+		markers.Clear();
+		foreach (ItemFormat item in getItemsToday())
+		{
+			markers.Add(new RadzenGoogleMapMarker
+			{
+				Position = new GoogleMapPosition()
+				{
+					Lat = item.activity.latitude,
+					Lng =
+			item.activity.longitude
+				},
+				Title = item.activity.name,
+				Label = item.activity.name
+			});
+		}
+	}
+
+	void nextDate()
+	{
+		if (count < dates.Count - 1)
+		{
+			count++;
+			date = dates[count];
+		}
+		else
+		{
+			count = 0;
+			date = dates[count];
+		}
+		getMarkers();
+	}
+
+	void previousDate()
+	{
+		if (count > 0)
+		{
+			count--;
+			date = dates[count];
+		}
+		else
+		{
+			count = dates.Count - 1;
+			date = dates[count];
+		}
+		getMarkers();
+	}
+
+	ItemFormat[] getItemsToday()
+	{
+		return items.Where(x => x.startDate == date.Date).ToArray();
+	}
+
+	void formatDates()
+	{
+		Dictionary<DateTime, bool> exist = new Dictionary<DateTime, bool>();
+		foreach (var item in items)
+		{
+			if (!exist.ContainsKey(item.startDate))
+			{
+				exist.Add(item.startDate, true);
+				dates.Add(item.startDate);
+			}
+		}
+	}
+
+}

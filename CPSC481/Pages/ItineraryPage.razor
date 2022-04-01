@@ -1,5 +1,11 @@
-@page "/itinerary"
+@page "/itinerary/{id:int}"
 
 <PageTitle>Bookie :: Itinerary</PageTitle>
 
-<Itinerary />
+<Itinerary id="@id" />
+
+@code {
+	[Parameter]
+	public int id { get; set; } = 0;
+
+}

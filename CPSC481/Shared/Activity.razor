@@ -5,9 +5,16 @@
 	<div class="flex flex-col h-full w-3/4 p-2 gap-y-4">
 		<button class="p-3 w-1/6 rounded bg-cream2 hover:bg-cream3 transition-all text-center text-xl text-black"
 			@onclick="onClick">Back</button>
-		<div class="flex flex-row h-full w-full gap-x-4">
+		<div class="flex flex-row justify-between items-start h-full w-full gap-x-4">
 			<ActivitySection id="@id" />
-			<AddToTripSection />
+			@if (StateContainer.isLoggedIn())
+			{
+				<AddToTripSection activityId="@id" />
+			}
+			else
+			{
+				<p class="text-md text-black font-medium text-center">Please login to view more features.</p>
+			}
 		</div>
 	</div>
 </div>

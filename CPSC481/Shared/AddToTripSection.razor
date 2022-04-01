@@ -1,16 +1,26 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex flex-col w-1/4 gap-y-3">
 	<p class="text-xl font-medium text-black">Current trip: Toronto 2022</p>
-	<button class="p-3 rounded bg-cream2 hover:bg-cream3 transition-all text-center text-xl text-black"
+	<button class="p-3 rounded bg-secondary-2 hover:bg-secondary-3 transition-all text-center text-xl text-black"
 		@onclick="favorite">Favorite</button>
 	@if (step == 4)
 	{
-		<div class="w-full text-xl font-medium text-cream bg-green p-3 rounded text-center">Added to Trip!</div>
+		@if (state == 1)
+		{
+			<div class="w-full text-xl font-medium text-secondary bg-green p-3 rounded text-center">Added to Trip!
+			</div>
+		}
+		else
+		{
+			<div class="w-full text-xl font-medium text-secondary bg-red p-3 rounded text-center">Failed!</div>
+			<p class="text-sm text-black font-medium">Try again later...</p>
+		}
 	}
 	else if (step == 0)
 	{
-		<button class=" p-3 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream"
+		<button class=" p-3 rounded bg-primary hover:bg-primary-2 transition-all text-center text-xl text-secondary"
 		@onclick="addToTrip">Add to
 			Trip</button>
 	}
@@ -18,21 +28,20 @@
 	{
 		<div class="flex flex-col gap-y-2 border-2 border-black rounded p-2 justify-center items-center">
 			<div class="w-full text-center border-b-2 border-black">
-				<p class="text-lg font-medium text-black">Existing Trips</p>
+				<p class="text-lg font-medium text-black">Choose Trip</p>
 			</div>
 			<ul class="flex flex-col gap-y-1 justify-center items-center w-full">
-				<li class="p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
-				@onclick="() => setTrip(0)">
-					<p class="text-md text-black">Toronto 2022</p>
-				</li>
-				<li class="p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
-				@onclick="() => setTrip(1)">
-					<p class="text-md text-black">Miami 2019</p>
-				</li>
+				@if (StateContainer.getActiveTrip() != null)
+				{
+					<li class="p-2 bg-secondary hover:bg-secondary-3 transition-all rounded cursor-pointer text-center w-full"
+				@onclick=@(() => setTrip(StateContainer.getActiveTrip()?.id ?? 0))>
+						<p class="text-md text-black">@StateContainer.getActiveTrip()?.getName()</p>
+					</li>
+				}
 				<li
-				class="flex flex-row justify-center items-center gap-x-2 p-2 bg-cream hover:bg-cream3 transition-all rounded cursor-pointer text-center w-full"
+				class="flex flex-row justify-center items-center gap-x-2 p-2 bg-secondary hover:bg-secondary-3 transition-all rounded cursor-pointer text-center w-full"
 				@onclick="addTrip">
-					<p class="text-md text-black">ADD TRIP</p>
+					<p class="text-md text-black">Change active trip</p>
 					<svg version="1.1" id="Capa_1" class="h-4 w-4 text-black" viewBox="0 0 27.963 27.963"
 					style="enable-background:new 0 0 27.963 27.963;" xml:space="preserve">
 						<path
@@ -44,23 +53,35 @@
 	}
 	@if (step == 2)
 	{
-		<div class="flex flex-col gap-y-2 border-2 border-black rounded p-2 justify-center items-center">
+		<div class="flex flex-col gap-y-2 border-2 border-black rounded p-2 justify-center items-center h-full">
 			<div class="w-full text-center border-b-2 border-black">
 				<p class="text-lg font-medium text-black">Choose Date & Time</p>
 			</div>
 			<div class="flex flex-col gap-y-1 w-full">
 				<p class="text-md text-black">Date:</p>
-				<RadzenDatePicker @bind-Value=@day DateFormat="MM-dd-yyyy" class="w-full focus:outline-none" />
+				<RadzenDatePicker @bind-Value=@day DateFormat="MMM dd yyyy" Change=@(() => datePicked())
+				class="w-full focus:outline-none" />
 				<p class="text-md text-black">Time:</p>
 				<RadzenDatePicker @bind-Value=@time ShowTime="true" TimeOnly="true" HourFormat="12" DateFormat="HH:mm"
 				class="w-full focus:outline-none" />
 			</div>
-			<img src="/images/toronto-city-map.jpeg" class="w-full h-full" />
+			@if (show)
+			{
+				<RadzenGoogleMap class="w-full h-full rounded border-black border-2" Center=@(new GoogleMapPosition() { Lat =
+			getItemsToday()[0].activity.latitude, Lng = getItemsToday()[0].activity.longitude })>
+					@foreach (ItemFormat item in getItemsToday())
+					{
+						<RadzenGoogleMapMarker Title="@item.activity.name" Label="@item.activity.name" Position=@(new GoogleMapPosition()
+				{ Lat = item.activity.latitude, Lng = item.activity.longitude }) />
+					}
+				</RadzenGoogleMap>
+			}
 			<div class="flex flex-row justify-center items-center w-full gap-x-2">
-				<button class="py-2 bg-red2 hover:bg-red text-cream text-md focus:outline-none rounded transition-all w-1/3"
+				<button class="py-2 bg-red-2 hover:bg-red text-secondary text-md focus:outline-none rounded transition-all w-1/3"
 				@onclick="cancel">Cancel</button>
-				<button class="py-2 bg-blue hover:bg-blue2 text-cream text-md focus:outline-none rounded transition-all w-1/3"
-				@onclick="addToTrip">Next</button>
+				<button
+				class="py-2 bg-primary hover:bg-primary-2 text-secondary text-md focus:outline-none rounded transition-all w-1/3"
+				@onclick="confirm">Next</button>
 			</div>
 		</div>
 	}
@@ -72,7 +93,7 @@
 			</div>
 			<div class="flex flex-col gap-y-1 w-full">
 				<p class="text-md text-black">Date:</p>
-				<RadzenDatePicker @bind-Value=@day DateFormat="MM-dd-yyyy" ReadOnly="true" class="w-full focus:outline-none" />
+				<RadzenDatePicker @bind-Value=@day DateFormat="MMM dd yyyy" ReadOnly="true" class="w-full focus:outline-none" />
 				<p class="text-md text-black">Time:</p>
 				<RadzenDatePicker @bind-Value=@time ShowTime="true" TimeOnly="true" HourFormat="12" ReadOnly="true"
 				DateFormat="HH:mm" class="w-full focus:outline-none" />
@@ -88,23 +109,79 @@
 </div>
 
 @code {
+	[Parameter]
+	public int activityId { get; set; }
 	private DateTime day = DateTime.Today;
 	private DateTime time = DateTime.Today;
 	private int step = 0;
 	private int trip = 0;
+	int state = 0;
+	Trip[] trips = Array.Empty<Trip>();
+	bool show;
+	IList<RadzenGoogleMapMarker> markers = new List<RadzenGoogleMapMarker>();
+	protected override void OnInitialized()
+	{
+		trips = StateContainer.getTrips();
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
+	}
 
 	void favorite() { }
-	void addToTrip() { step += 1; }
+	void datePicked()
+	{
+		show = true;
+		getMarkers();
+	}
+	void addToTrip()
+	{
+		bool res = StateContainer.addToItinerary(activityId, day, time.ToString("HH:mm"), day.AddHours(1),
+		time.AddHours(1).ToString("HH:mm"));
+		step += 1;
+		if (res)
+		{
+			state = 1;
+		}
+		else
+		{
+			state = -1;
+		}
+	}
 	void cancel() { step = 0; }
-
+	void confirm() { step += 1; }
 	void setTrip(int id)
 	{
 		trip = id;
+		day = StateContainer.getTripDetails(id)!.startDate;
 		step += 1;
+	}
+	void getMarkers()
+	{
+		markers.Clear();
+		foreach (ItemFormat item in getItemsToday())
+		{
+			markers.Add(new RadzenGoogleMapMarker
+			{
+				Position = new GoogleMapPosition()
+				{
+					Lat = item.activity.latitude,
+					Lng =
+			item.activity.longitude
+				},
+				Title = item.activity.name,
+				Label = item.activity.name
+			});
+		}
 	}
 
 	void addTrip()
 	{
-		NavManager.NavigateTo("/starttrip");
+		NavManager.NavigateTo("/trips");
+	}
+	ItemFormat[] getItemsToday()
+	{
+		return StateContainer.getItinerary(trip).Where(x => x.startDate == day).ToArray();
 	}
 }

@@ -51,7 +51,7 @@
 	{
 		trip = StateContainer.getTripDetails(id);
 		StateContainer.OnChange += StateHasChanged;
-		url = $"/itinerary?id={id}";
+		url = $"/itinerary/{id}";
 	}
 
 	public void Dispose()

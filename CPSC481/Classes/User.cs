@@ -41,4 +41,41 @@ public class User
 		if (trip == null) return null;
 		return trip;
 	}
+
+	public bool addToItinerary(Item activity, DateTime startDate, string startTime, DateTime endDate, string endTime)
+	{
+		if (activeTrip == null) return false;
+		foreach (Trip trip in trips)
+		{
+			if (trip.id == activeTrip.id)
+			{
+				bool res = trip.addToItinerary(activity, startDate, startTime, endDate, endTime);
+				activeTrip = trip;
+				return res;
+			}
+		}
+		return false;
+	}
+
+	public bool removeFromItinerary(Item activity)
+	{
+		if (activeTrip == null) return false;
+		foreach (Trip trip in trips)
+		{
+			if (trip.id == activeTrip.id)
+			{
+				bool res = trip.removeFromItinerary(activity);
+				activeTrip = trip;
+				return res;
+			}
+		}
+		return false;
+	}
+
+	public ItemFormat[]? getItinerary(int id)
+	{
+		Trip? trip = trips.FirstOrDefault(t => t.id == id);
+		if (trip == null) return null;
+		return trip.getItinerary();
+	}
 }

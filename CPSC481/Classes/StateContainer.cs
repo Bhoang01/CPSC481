@@ -116,19 +116,33 @@ namespace CPSC481.Classes
 			return currentUser.getTrips();
 		}
 
+		public bool addToItinerary(int id, DateTime startDate, string startTime, DateTime endDate, string endTime)
+		{
+			if (currentUser == null) return false;
+			Item? activity = activities.FirstOrDefault(a => a.id == id);
+			if (activity == null) return false;
+			bool res = currentUser.addToItinerary(activity, startDate, startTime, endDate, endTime);
+			NotifyStateChanged();
+			return res;
+		}
+		public bool removeFromItinerary(int id)
+		{
+			if (currentUser == null) return false;
+			Item? activity = activities.FirstOrDefault(a => a.id == id);
+			if (activity == null) return false;
+			bool res = currentUser.removeFromItinerary(activity);
+			NotifyStateChanged();
+			return res;
+		}
+		public ItemFormat[]? getItinerary(int id)
+		{
+			if (currentUser == null) return null;
+			return currentUser.getItinerary(id);
+		}
 		public event Action? OnChange;
 		private void NotifyStateChanged() => OnChange?.Invoke();
 		public StateContainer()
 		{
-			User user = new User("Zeyad", "Omran", "zeyad@bookie.com", "1234");
-			user.addTrip("London 2020", new DateTime(2020, 1, 1), new DateTime(2020, 1, 12), "London");
-			user.addTrip("Tokyo 2021", new DateTime(2021, 1, 1), new DateTime(2021, 1, 12), "Tokyo");
-			users.Add(user);
-			users.Add(new User("Briana", "Hoang", "briana@bookie.com", "1234"));
-			users.Add(new User("Youstina", "Attia", "youstina@bookie.com", "1234"));
-			users.Add(new User("Vi", "Tsang", "vi@bookie.com", "1234"));
-			users.Add(new User("Yanessa", "Lacsamana", "yanessa@bookie.com", "1234"));
-
 			string[] images = {
 			"https://s3-media0.fl.yelpcdn.com/bphoto/oI84H-SWvD_XbblbZsgCJg/348s.jpg",
 			"https://s3-media0.fl.yelpcdn.com/bphoto/ZaMPU6i9BL_DeRn9tS8OSg/348s.jpg"
@@ -140,8 +154,8 @@ namespace CPSC481.Classes
 				"We’re a collection of dreamers that believe food has the power to transcend and fuel the dreams of those around us. The dreams of our team (through providing opportunity and helping develop life skills); the dreams of our guests (by serving nutrient dense food that gives them the energy to pursue their ambitions).",
 				"Food",
 				"181 Bay Street Brookfield Place, Toronto, ON M5J 2T3",
-				"-79.380660",
-				"43.662600",
+				-79.380660,
+				43.662600,
 				20.0,
 				images,
 				0,
@@ -164,8 +178,8 @@ namespace CPSC481.Classes
 			 "The CN Tower is a 553.3 m-high concrete communications and observation tower located in the downtown core of Toronto, Ontario, Canada. Built on the former Railway Lands, it was completed in 1976. Its name \"CN\" originally referred to Canadian National, the railway company that built the tower.",
 			 "Landmark",
 			 "290 Bremner Blvd, Toronto, ON M5V 3L9",
-			 "-79.3892455",
-			 "43.6425662",
+			 -79.3892455,
+			 43.6425662,
 			 29.0,
 			 images,
 				0,
@@ -176,6 +190,17 @@ namespace CPSC481.Classes
 			activity.addReview("John", 4.2, "Great for family!");
 			activity.addReview("Peter", 4.8, "So much fun!");
 			activities.Add(activity);
+
+			User user = new User("Zeyad", "Omran", "zeyad@bookie.com", "1234");
+			user.addTrip("London 2020", new DateTime(2020, 1, 1), new DateTime(2020, 1, 12), "London");
+			user.addTrip("Tokyo 2021", new DateTime(2021, 1, 1), new DateTime(2021, 1, 12), "Tokyo");
+			user.addToItinerary(activities[0], new DateTime(2021, 1, 2), "14:00", new DateTime(2021, 1, 2), "15:00");
+			user.addToItinerary(activities[1], new DateTime(2021, 1, 5), "14:00", new DateTime(2021, 1, 5), "15:00");
+			users.Add(user);
+			users.Add(new User("Briana", "Hoang", "briana@bookie.com", "1234"));
+			users.Add(new User("Youstina", "Attia", "youstina@bookie.com", "1234"));
+			users.Add(new User("Vi", "Tsang", "vi@bookie.com", "1234"));
+			users.Add(new User("Yanessa", "Lacsamana", "yanessa@bookie.com", "1234"));
 		}
 	}
 }
