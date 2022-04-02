@@ -54,12 +54,16 @@
 		{
 			NavManager.NavigateTo("/");
 		}
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("reRoute", out var _reRoute))
+			reRoute = Convert.ToString(_reRoute);
 	}
 	private string email { get; set; } = String.Empty;
 	private string? emailError = null;
 	private string password { get; set; } = String.Empty;
 	private string? passwordError = null;
 	private string? formError = null;
+	private string? reRoute;
 	private void login()
 	{
 		if (email.Length < 1)
@@ -83,7 +87,8 @@
 			string? error = StateContainer.login(email, password);
 			if (error == null)
 			{
-				NavManager.NavigateTo("/");
+				if (reRoute == null) NavManager.NavigateTo("/");
+				else NavManager.NavigateTo($"/{reRoute}");
 			}
 			else
 			{

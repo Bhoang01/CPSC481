@@ -67,7 +67,7 @@
 	{
 		if (!StateContainer.isLoggedIn())
 		{
-			NavManager.NavigateTo("/login");
+			NavManager.NavigateTo("/login?reRoute=itinerary/" + id);
 			return;
 		}
 

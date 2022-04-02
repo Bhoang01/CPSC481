@@ -27,7 +27,7 @@
 	{
 		if (!StateContainer.isLoggedIn())
 		{
-			NavManager.NavigateTo("/login");
+			NavManager.NavigateTo("/login?reRoute=favorites");
 		}
 		favorites = StateContainer.getFavorites();
 		StateContainer.OnChange += StateHasChanged;

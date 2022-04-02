@@ -36,7 +36,7 @@
 		StateContainer.OnChange += StateHasChanged;
 		if (!StateContainer.isLoggedIn())
 		{
-			NavManager.NavigateTo("/login");
+			NavManager.NavigateTo("/login?reRoute=trips");
 		}
 		else
 		{
