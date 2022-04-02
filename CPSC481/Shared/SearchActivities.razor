@@ -13,22 +13,29 @@
 					@onclick="onClick" @onclick:preventDefault @onkeypress="onClick" @onkeypress:preventDefault>Search</button>
 			</form>
 		</div>
-		<button class="p-2 w-1/6 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream"
+		@if (StateContainer.getActiveTrip() == null)
+		{
+			<button class="p-2 w-1/6 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream"
 			@onclick="startTrip">
-			Start Your Trip
-		</button>
+				Start Your Trip
+			</button>
+		}
 	</div>
 	<h3 class="text-xl font-medium">Results</h3>
-	<div class="grid gap-4 grid-cols-4 w-full">
-		@if (activities.Length > 0)
-		{
+	@if (activities.Length > 0)
+	{
+		<div class="grid gap-4 grid-cols-4 w-full">
 			@foreach (Item a in activities)
 			{
 				<ActivityCard id="@a.id" name="@a.name" url="@a.images[0]" rating="@a.rating" price="@a.price"
 			category="@a.category" />
 			}
-		}
-	</div>
+		</div>
+	}
+	else
+	{
+		<p class="text-md font-medium text-black">No Activities found :(</p>
+	}
 </div>
 
 @code {

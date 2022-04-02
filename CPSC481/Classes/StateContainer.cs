@@ -139,6 +139,33 @@ namespace CPSC481.Classes
 			if (currentUser == null) return null;
 			return currentUser.getItinerary(id);
 		}
+		public bool addToFavorites(int id)
+		{
+			if (currentUser == null) return false;
+			Item? activity = activities.FirstOrDefault(a => a.id == id);
+			if (activity == null) return false;
+			bool res = currentUser.addToFavorites(activity);
+			NotifyStateChanged();
+			return res;
+		}
+		public bool removeFromFavorites(int id)
+		{
+			if (currentUser == null) return false;
+			bool res = currentUser.removeFromFavorites(id);
+			NotifyStateChanged();
+			return res;
+		}
+
+		public Item[]? getFavorites()
+		{
+			if (currentUser == null) return null;
+			return currentUser.getFavorites();
+		}
+		public bool isFavorited(int id)
+		{
+			if (currentUser == null) return false;
+			return currentUser.isFavorited(id);
+		}
 		public event Action? OnChange;
 		private void NotifyStateChanged() => OnChange?.Invoke();
 		public StateContainer()

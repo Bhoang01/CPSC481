@@ -6,6 +6,7 @@ public class User
 	private string password;
 	private List<Trip> trips = new List<Trip>();
 	private Trip? activeTrip = null;
+	public List<Item> favorites = new List<Item>();
 	public User(string firstName, string lastName, string email, string password)
 	{
 		this.firstName = firstName;
@@ -78,4 +79,20 @@ public class User
 		if (trip == null) return null;
 		return trip.getItinerary();
 	}
+
+	public bool addToFavorites(Item activity)
+	{
+		favorites.Add(activity);
+		return true;
+	}
+
+	public bool removeFromFavorites(int id)
+	{
+		Item? activity = favorites.FirstOrDefault(a => a.id == id);
+		if (activity == null) return false;
+		favorites.Remove(activity);
+		return true;
+	}
+	public Item[] getFavorites() => favorites.ToArray();
+	public bool isFavorited(int id) => favorites.Any(a => a.id == id);
 }

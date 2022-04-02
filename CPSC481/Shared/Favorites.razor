@@ -1,26 +1,39 @@
+@inject CPSC481.Classes.StateContainer StateContainer;
+@inject NavigationManager NavManager;
+
 <div class="w-full flex flex-col justify-center items-center p-2">
 	<div class="w-3/4 flex flex-col h-full p-2 gap-y-4">
-		<h3 class="text-2xl font-medium">Favorites</h3>
+		<h3 class="text-2xl font-medium text-black">Favorites</h3>
 		<div class="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
-			<ActivityCard name="iQ Food Co."
-				url="https://media-cdn.tripadvisor.com/media/photo-s/0e/6f/e2/69/iq-brookfield-place.jpg" rating="4" price="15"
-				category="Food" />
-			<ActivityCard name="CN Tower"
-				url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/ae/78/cn-tower.jpg?w=1400&h=-1&s=1"
-				rating="3" price="100" category="Landmark" />
-			<ActivityCard name="Ripley's aquarium"
-				url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/34/b0/8a/entrance.jpg?w=1600&h=-1&s=1"
-				rating="4" price="45" category="Landmark" />
-			<ActivityCard name="The Butcher Chef" url="https://resizer.otstatic.com/v2/photos/xlarge/3/28373710.jpg"
-				rating="5" price="200" category="Food" />
-			<ActivityCard name="CN Tower"
-				url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/c7/ae/78/cn-tower.jpg?w=1400&h=-1&s=1"
-				rating="3" price="100" category="Landmark" />
-			<ActivityCard name="Ripley's aquarium"
-				url="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/34/b0/8a/entrance.jpg?w=1600&h=-1&s=1"
-				rating="4" price="45" category="Landmark" />
-			<ActivityCard name="The Butcher Chef" url="https://resizer.otstatic.com/v2/photos/xlarge/3/28373710.jpg"
-				rating="5" price="200" category="Food" />
+			@if (favorites != null && favorites.Length > 0)
+			{
+				@foreach (Item a in favorites)
+				{
+					<ActivityCard id="@a.id" name="@a.name" url="@a.images[0]" rating="@a.rating" price="@a.price"
+				category="@a.category" />
+				}
+			}
+			else
+			{
+				<p class="text-md font-medium text-black">You have no favorites.</p>
+			}
 		</div>
 	</div>
 </div>
+
+@code {
+	Item[]? favorites = Array.Empty<Item>();
+	protected override void OnInitialized()
+	{
+		if (!StateContainer.isLoggedIn())
+		{
+			NavManager.NavigateTo("/login");
+		}
+		favorites = StateContainer.getFavorites();
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
+	}
+}
