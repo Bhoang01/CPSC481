@@ -8,7 +8,7 @@ namespace CPSC481.Classes
 		private List<Item> activities = new List<Item>();
 		public string? searchURL;
 		public bool loaded = false;
-
+		public Dictionary<int, Trip> sharedItineraries = new Dictionary<int, Trip>();
 
 		public bool isLoggedIn() => currentUser != null;
 		public string? getFirstName() => currentUser?.firstName;
@@ -154,6 +154,19 @@ namespace CPSC481.Classes
 			bool res = currentUser.removeFromFavorites(id);
 			NotifyStateChanged();
 			return res;
+		}
+
+		public void shareItinerary(int id)
+		{
+			if (currentUser == null) return;
+			sharedItineraries.Add(id, currentUser.getTripDetails(id)!);
+			NotifyStateChanged();
+		}
+		public Trip? getSharedItinerary(int id)
+		{
+			if (sharedItineraries.ContainsKey(id))
+				return sharedItineraries[id];
+			return null;
 		}
 
 		public Item[]? getFavorites()

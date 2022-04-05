@@ -21,15 +21,11 @@
 						{
 							@foreach (ItemFormat item in getItemsToday())
 							{
-								<div class="flex flex-col gap-y-1 border-2 border-black rounded p-2">
+								<div class="flex flex-col justify-center items-center gap-y-1 border-2 border-black rounded p-2">
 									<p class="text-lg font-medium text-black">@item.activity.name</p>
-									<div class="flex flex-row items-center justify-between">
-										<div class="text-sm text-black w-full flex justify-start gap-x-4">
-											<p class="font-bold">Start Time: </p>
-											<p>@item.startTime</p>
-										</div>
-										<button
-								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
+									<div class="text-sm text-black w-full flex justify-center items-center gap-x-4">
+										<p class="font-bold">Start Time: </p>
+										<p>@item.startTime</p>
 									</div>
 								</div>
 							}
@@ -52,12 +48,6 @@
 					}
 				</div>
 			</div>
-			<div class="flex flex-row w-3/5 justify-end items-center gap-x-4">
-				<button class="p-2 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Download
-				</button>
-				<button class="p-2 w-1/4 rounded bg-green hover:bg-green2 transition-all text-center text-lg text-cream"
-				@onclick="share">Share</button>
-			</div>
 		}
 		else
 		{
@@ -79,14 +69,8 @@
 
 	protected override void OnInitialized()
 	{
-		if (!StateContainer.isLoggedIn())
-		{
-			NavManager.NavigateTo("/login?reRoute=itinerary/" + id);
-			return;
-		}
-
-		items = StateContainer.getItinerary(id) ?? Array.Empty<ItemFormat>();
-		trip = StateContainer.getTripDetails(id);
+		trip = StateContainer.getSharedItinerary(id);
+		if (trip != null) items = trip.getItinerary();
 		StateContainer.OnChange += StateHasChanged;
 		formatDates();
 		count = 0;
@@ -168,12 +152,5 @@
 		{
 			dates.Add(date);
 		}
-	}
-
-	void share()
-	{
-		StateContainer.shareItinerary(id);
-		StateContainer.logout();
-		NavManager.NavigateTo("/share/" + id);
 	}
 }
