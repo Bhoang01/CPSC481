@@ -77,10 +77,14 @@
 			{
 				<RadzenGoogleMap class="w-full h-full rounded border-black border-2" Center=@(new GoogleMapPosition() { Lat =
 			getItemsToday()[0].activity.latitude, Lng = getItemsToday()[0].activity.longitude })>
-					@foreach (ItemFormat item in getItemsToday())
+					@if (getItemsToday().Length > 0)
 					{
-						<RadzenGoogleMapMarker Title="@item.activity.name" Label="@item.activity.name" Position=@(new GoogleMapPosition()
+						@foreach (ItemFormat item in getItemsToday())
+						{
+							<RadzenGoogleMapMarker Title="@item.activity.name" Label="@item.activity.name" Position=@(new GoogleMapPosition()
 				{ Lat = item.activity.latitude, Lng = item.activity.longitude }) />
+						}
+
 					}
 				</RadzenGoogleMap>
 			}
@@ -197,7 +201,7 @@
 
 	void addTrip()
 	{
-		NavManager.NavigateTo("/trips");
+		NavManager.NavigateTo($"/trips?reRoute=activity/{activityId}");
 	}
 	ItemFormat[] getItemsToday()
 	{

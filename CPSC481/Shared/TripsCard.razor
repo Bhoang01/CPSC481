@@ -46,12 +46,16 @@
 	public int id { get; set; }
 	Trip? trip = null;
 	string? url = null;
+	private string? reRoute;
 
 	protected override void OnInitialized()
 	{
 		trip = StateContainer.getTripDetails(id);
 		StateContainer.OnChange += StateHasChanged;
 		url = $"/itinerary/{id}";
+		var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("reRoute", out var _reRoute))
+			reRoute = Convert.ToString(_reRoute);
 	}
 
 	public void Dispose()
@@ -61,5 +65,6 @@
 	void onClick()
 	{
 		StateContainer.setActiveTrip(trip?.getName());
+		if (reRoute != null) NavManager.NavigateTo($"/{reRoute}");
 	}
 }
