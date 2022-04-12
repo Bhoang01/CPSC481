@@ -10,11 +10,11 @@ Zeyad Omran<br>
 
 
 ## Set up
-- 1) Download and install [node.js](https://nodejs.org/en/) (We're using v16.14.0).
-- 2) Download and install [dotnet 6.0](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/install) (We're using v6.0.200).
-- 3) cd into `CPSC481/CPSC481` (The sub dir not the root of the project).
-- 4) run `npm install` in your terminal.
-- 5) run `dotnet watch` in your terminal.
+1) Download and install [node.js](https://nodejs.org/en/) (We're using v16.14.0).
+2) Download and install [dotnet 6.0](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/install) (We're using v6.0.200).
+3) cd into `CPSC481/CPSC481` (The sub dir not the root of the project).
+4) run `npm install` in your terminal.
+5) run `dotnet watch` in your terminal.
 
 ## Notes when using the system.
 - DO NOT REFRESH THE PAGE AS THE SESSION IS NOT PERSISTENT AND SOME OF THE DATA YOU ENTERED MAY BE LOST.
