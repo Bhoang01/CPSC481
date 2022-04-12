@@ -32,7 +32,7 @@
 			<p class="text-md">People: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
-					min="1" max="20" @bind="people" @onchange="@(() => changedFilter())" />
+					min="1" max="20" @bind="people" />
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
 					placeholder="# People" @bind="people" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>
@@ -42,7 +42,7 @@
 			<p class="text-md">Rating: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
-					min="1" max="5" @bind="rating" @onchange="@(() => changedFilter())" />
+					min="1" max="5" @bind="rating" />
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
 					placeholder="Rating" @bind="rating" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>

@@ -28,8 +28,6 @@
 											<p class="font-bold">Start Time: </p>
 											<p>@item.startTime</p>
 										</div>
-										<button
-								class="p-1 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-md text-cream">Edit</button>
 									</div>
 								</div>
 							}
@@ -48,13 +46,15 @@
 					}
 					else
 					{
-						<RadzenGoogleMap class="w-full h-full rounded border-black border-2" />
+						<RadzenGoogleMap class="w-full h-full rounded border-black border-2" Center=@(new GoogleMapPosition() { Lat =
+					43.6532, Lng = -79.3832 }) />
 					}
 				</div>
 			</div>
 			<div class="flex flex-row w-3/5 justify-end items-center gap-x-4">
-				<button class="p-2 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream">Download
-				</button>
+				<a class="p-2 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-lg text-cream"
+				href="/Itinerary.pdf" target="_blank">Download
+				</a>
 				<button class="p-2 w-1/4 rounded bg-green hover:bg-green2 transition-all text-center text-lg text-cream"
 				@onclick="share">Share</button>
 			</div>
