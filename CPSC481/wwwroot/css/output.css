@@ -1085,6 +1085,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(227 217 182 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-cream2:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 232 210 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-secondary-3:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(227 217 182 / var(--tw-bg-opacity));
@@ -1108,11 +1113,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:bg-blue2:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(37 123 203 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-cream2:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 232 210 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-green2:hover {

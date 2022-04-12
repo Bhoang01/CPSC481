@@ -1,4 +1,5 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex flex-col w-1/5 p-2">
 	<div>
@@ -19,11 +20,11 @@
 			<p class="text-md">Price: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="Min Price" @bind="minPrice" @bind:event="oninput" />
+					placeholder="Min Price" @bind="minPrice" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 				<p>to</p>
 
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="Max Price" @bind="maxPrice" @bind:event="oninput" />
+					placeholder="Max Price" @bind="maxPrice" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>
 		</div>
 
@@ -31,9 +32,9 @@
 			<p class="text-md">People: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
-					min="1" max="20" @bind="people" />
+					min="1" max="20" @bind="people" @onchange="@(() => changedFilter())" />
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="# People" @bind="people" @bind:event="oninput" />
+					placeholder="# People" @bind="people" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>
 		</div>
 
@@ -41,9 +42,9 @@
 			<p class="text-md">Rating: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="range" class="p-1 text-sm w-24 focus:outline-none opacity-70 hover:opacity-100 transition-all"
-					min="1" max="5" @bind="rating" />
+					min="1" max="5" @bind="rating" @onchange="@(() => changedFilter())" />
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="Rating" @bind="rating" @bind:event="oninput" />
+					placeholder="Rating" @bind="rating" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>
 		</div>
 
@@ -51,21 +52,21 @@
 			<p class="text-md">Age: </p>
 			<div class="flex w-full flex-row justify-between items-center mt-1">
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="Min Age" @bind="minAge" @bind:event="oninput" />
+					placeholder="Min Age" @bind="minAge" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 				<p>to</p>
 				<input type="number" class="p-1 text-sm w-24 focus:outline-none bg-cream border-black rounded border-2"
-					placeholder="Max Age" @bind="maxAge" @bind:event="oninput" />
+					placeholder="Max Age" @bind="maxAge" @bind:event="oninput" @onchange="@(() => changedFilter())" />
 			</div>
 		</div>
 
 		<div class="flex flex-row justify-start items-center gap-x-4">
 			@if (childFriendly)
 			{
-				<input type="checkbox" class="" checked />
+				<input type="checkbox" class="" checked @onclick="@(() => setChild())" />
 			}
 			else
 			{
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setChild())" />
 			}
 			<p class="text-md">Child Friendly</p>
 		</div>
@@ -73,11 +74,11 @@
 		<div class="flex flex-row justify-start items-center gap-x-4">
 			@if (adultsOnly)
 			{
-				<input type="checkbox" class="" checked />
+				<input type="checkbox" class="" checked @onclick="@(() => setAdult())" />
 			}
 			else
 			{
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setAdult())" />
 			}
 			<p class="text-md">Adults Only</p>
 		</div>
@@ -85,19 +86,23 @@
 		<div class="flex flex-col justify-start items-start gap-y-2">
 			<p class="text-md font-bold">Categories: </p>
 			<div class="flex flex-row justify-start items-center gap-x-4">
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setCategory("Popular"))"
+					checked="@(() => category == "Popular" ? true : false)" />
 				<p class="text-md">Popular</p>
 			</div>
 			<div class="flex flex-row justify-start items-center gap-x-4">
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setCategory("Food"))"
+					checked="@(() => category == "Food" ? true : false)" />
 				<p class="text-md">Food</p>
 			</div>
 			<div class="flex flex-row justify-start items-center gap-x-4">
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setCategory("Nature"))"
+					checked="@(() => category == "Nature" ? true : false)" />
 				<p class="text-md">Nature</p>
 			</div>
 			<div class="flex flex-row justify-start items-center gap-x-4">
-				<input type="checkbox" class="" />
+				<input type="checkbox" class="" @onclick="@(() => setCategory("Landmark"))"
+					checked="@(() => category == "Landmark" ? true : false)" />
 				<p class="text-md">Landmark</p>
 			</div>
 		</div>
@@ -109,42 +114,85 @@
 	[Parameter]
 	public string location { get; set; } = String.Empty;
 	[Parameter]
-	public string? category { get; set; }
+	public string category { get; set; }
 	[Parameter]
-	public int? minPrice { get; set; }
+	public int minPrice { get; set; }
 	[Parameter]
-	public int? maxPrice { get; set; }
+	public int maxPrice { get; set; }
 	[Parameter]
-	public int? people { get; set; }
+	public int people { get; set; }
 	[Parameter]
-	public int? rating { get; set; }
+	public int rating { get; set; }
 	[Parameter]
-	public int? minAge { get; set; }
+	public int minAge { get; set; }
 	[Parameter]
-	public int? maxAge { get; set; }
+	public int maxAge { get; set; }
 	[Parameter]
 	public bool childFriendly { get; set; }
 	[Parameter]
 	public bool adultsOnly { get; set; }
+	public Filters filters { get; set; }
+	void changedFilter()
+	{
+		filters.update(location, minPrice, maxPrice, people, rating, minAge, maxAge, category, adultsOnly, childFriendly);
+		Console.WriteLine(rating);
+		filters = StateContainer.setFilters(filters);
+	}
+
+	void setCategory(string c)
+	{
+		if (category == c)
+		{
+			category = String.Empty;
+		}
+		else
+		{
+			category = c;
+		}
+		changedFilter();
+		InvokeAsync(StateHasChanged);
+	}
+
+	void setAdult()
+	{
+		adultsOnly = !adultsOnly;
+		changedFilter();
+		InvokeAsync(StateHasChanged);
+	}
+
+	void setChild()
+	{
+		childFriendly = !childFriendly;
+		changedFilter();
+		InvokeAsync(StateHasChanged);
+	}
+
 	void goBack()
 	{
 		NavManager.NavigateTo("/");
 	}
 	protected override void OnInitialized()
 	{
+		filters = StateContainer.getFilters();
 		if (category == String.Empty)
-			category = null;
+			category = filters.category;
 		if (minPrice == -1)
-			minPrice = null;
+			minPrice = filters.minPrice;
 		if (maxPrice == -1)
-			maxPrice = null;
+			maxPrice = filters.maxPrice;
 		if (people == -1)
-			people = null;
+			people = filters.people;
 		if (rating == -1)
-			rating = null;
+			rating = filters.rating;
 		if (minAge == -1)
-			minAge = null;
+			minAge = filters.minAge;
 		if (maxAge == -1)
-			maxAge = null;
+			maxAge = filters.maxAge;
+
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
 	}
 }

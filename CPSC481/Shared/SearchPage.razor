@@ -1,4 +1,5 @@
 @inject NavigationManager NavManager
+@inject CPSC481.Classes.StateContainer StateContainer
 
 <div class="flex flex-col w-full justify-center items-center p-2">
 	<div class="flex flex-row h-full w-3/4">
@@ -44,5 +45,22 @@
 			childFriendly = bool.Parse(_childFriendly);
 		if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("adultsOnly", out var _adultsOnly))
 			adultsOnly = bool.Parse(_adultsOnly);
+		Filters filters = new Filters();
+		filters.city = location;
+		filters.category = category;
+		filters.minPrice = minPrice;
+		filters.maxPrice = maxPrice;
+		filters.people = people;
+		filters.rating = rating;
+		filters.minAge = minAge;
+		filters.maxAge = maxAge;
+		filters.isChild = childFriendly;
+		filters.isAdult = adultsOnly;
+		StateContainer.setFilters(filters);
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
 	}
 }

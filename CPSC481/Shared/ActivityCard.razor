@@ -1,11 +1,12 @@
 @inject NavigationManager NavManager
 
-<div class="group flex flex-col transition-all cursor-pointer border-black rounded-md border-2 divide-y-2 divide-black"
+<div
+	class="group hover:bg-cream2 flex flex-col transition-all cursor-pointer border-black rounded-md border-2 divide-y-2 divide-black"
 	@onclick="gotoActPage">
 	<div class="w-full">
 		<img src="@url" class="w-full rounded-t aspect-video group-hover:brightness-75" alt="@name image" />
 	</div>
-	<div class="group-hover:bg-cream2 rounded-b-md flex flex-col gap-y-2 p-2 justify-start items-start">
+	<div class="group-hover:bg-cream2 rounded-b-md flex flex-col gap-y-2 p-2 justify-between h-full items-start">
 		<p class="text-black text-xl font-medium">@name</p>
 		<div class="flex flex-row w-full justify-between items-center">
 			<div class="flex flex-row items-center justify-center gap-x-1">

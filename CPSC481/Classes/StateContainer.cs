@@ -7,6 +7,7 @@ namespace CPSC481.Classes
 		private User? currentUser = null;
 		private List<Item> activities = new List<Item>();
 		public string? searchURL;
+		public Filters filters = new Filters();
 		public bool loaded = false;
 		public Dictionary<int, Trip> sharedItineraries = new Dictionary<int, Trip>();
 
@@ -38,23 +39,37 @@ namespace CPSC481.Classes
 			NotifyStateChanged();
 			return true;
 		}
-		public Item[] getActivities(string city, int? minPrice, int? maxPrice, int? people, double? rating, int? minAge, int? maxAge, string? category, bool isAdult, bool isChild)
+		public Item[] getActivities()
 		{
-			searchURL = $"/search?location={city}&minPrice={minPrice}&maxPrice={maxPrice}&people={people}&rating={rating}&minAge={minAge}&maxAge={maxAge}&isAdult={isAdult}&isChild={isChild}&category={category}";
+			searchURL = $"/search?{filters.getUrl()}";
 			List<Item> filteredActivities = new List<Item>();
 			foreach (Item activity in activities)
 			{
-				if (activity.city.ToLower() != city.ToLower()) continue;
-				if (activity.price < minPrice || activity.price > maxPrice) continue;
-				if (activity.people < people) continue;
-				if (activity.rating < rating) continue;
-				if (activity.minAge > minAge || activity.maxAge > maxAge) continue;
-				if (category != String.Empty && activity.category.ToLower() != category?.ToLower()) continue;
-				if (isAdult && activity.minAge < 18) continue;
-				if (isChild && activity.maxAge > 18) continue;
+				if (activity.city.ToLower() != filters.city.ToLower()) continue;
+				if (filters.activityName.CompareTo(String.Empty) != 0 && !activity.name.ToLower().Contains(filters.activityName.ToLower())) continue;
+				if (activity.price < filters.minPrice || activity.price > filters.maxPrice) continue;
+				if (activity.people < filters.people) continue;
+				if (activity.rating < filters.rating) continue;
+				if (activity.minAge > filters.minAge || activity.maxAge > filters.maxAge) continue;
+				if (filters.category != String.Empty && activity.category.ToLower() != filters.category?.ToLower()) continue;
+				if (filters.isAdult && activity.minAge < 18) continue;
+				if (filters.isChild && activity.maxAge > 18) continue;
 				filteredActivities.Add(activity);
 			}
 			return filteredActivities.ToArray();
+		}
+
+		public Filters setFilters(Filters filters)
+		{
+			this.filters = filters;
+			NotifyStateChanged();
+			return filters;
+		}
+
+
+		public Filters getFilters()
+		{
+			return filters;
 		}
 		public Item? getActivity(int id)
 		{
@@ -434,7 +449,7 @@ namespace CPSC481.Classes
 			 "With a collection of more than 90,000 works of art, the Art Gallery of Ontario (AGO) is among the largest and most distinguished art museums in North America. An international landmark, the AGO is also one of Canada’s most innovative cultural destinations. Highlights of the Gallery’s world-class collection include iconic Canadian and Inuit works, along with European and contemporary art – all on view in a spectacular building transformed by renowned Toronto-born architect Frank Gehry.",
 			 "Popular",
 			 "317 Dundas St W, Toronto, ON M5T 1G4",
-			 43.653777, 
+			 43.653777,
 			 -79.392523,
 			 25.0,
 			 images,
@@ -482,7 +497,7 @@ namespace CPSC481.Classes
 			 "Founded by the pioneering American actor and director Sam Wanamaker, Shakespeare's Globe is a unique international resource dedicated to the exploration of Shakespeare's work and the playhouse for which he wrote, through the connected means of performance and education.Together, the Globe Theatre Company, Shakespeare's Globe Exhibition and Globe Education seek to further the experience and international understanding of Shakespeare in performance.",
 			 "Popular",
 			 "Cardinal Cap Alley, London SE1 9JF, United Kingdom",
-			 51.508198, 
+			 51.508198,
 			 -0.0971281,
 			 29.0,
 			 images,
@@ -530,7 +545,7 @@ namespace CPSC481.Classes
 			 "Choreographed to music, the Dubai Fountain shoots water as high as 500 feet –that’s as high as a 50-story building. Designed by creators of the Fountains of Bellagio in Vegas, Dubai Fountain Performances occur daily on the 30-acre Burj Khalifa Lake.",
 			 "Landmark",
 			 "Sheikh Mohammed bin Rashid Blvd - Downtown Dubai - Dubai - United Arab Emirates",
-			 25.195261, 
+			 25.195261,
 			 55.275161,
 			 0.0,
 			 images,
@@ -551,7 +566,7 @@ namespace CPSC481.Classes
 			 14,
 			 "Bussola",
 			 "Dubai",
-			 "Seaview Italian restaurant with pizzeria on top deck, romantic fine dining below, plus terrace bar.",			
+			 "Seaview Italian restaurant with pizzeria on top deck, romantic fine dining below, plus terrace bar.",
 			 "Food",
 			 "The Westin Dubai Mina Seyahi Beach Resort & Marina - Dubai - United Arab Emirates",
 			 25.09398,

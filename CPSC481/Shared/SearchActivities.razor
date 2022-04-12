@@ -22,10 +22,10 @@
 		}
 	</div>
 	<h3 class="text-xl font-medium">Results</h3>
-	@if (activities.Length > 0)
+	@if (StateContainer.getActivities().Length > 0)
 	{
 		<div class="grid gap-4 grid-cols-4 w-full">
-			@foreach (Item a in activities)
+			@foreach (Item a in StateContainer.getActivities())
 			{
 				<ActivityCard id="@a.id" name="@a.name" url="@a.images[0]" rating="@a.rating" price="@a.price"
 			category="@a.category" />
@@ -60,10 +60,11 @@
 	[Parameter]
 	public bool adultsOnly { get; set; }
 	private string query = String.Empty;
-	private Item[] activities = Array.Empty<Item>();
 	void onClick()
 	{
-		if (query == String.Empty) return;
+		Filters filters = StateContainer.getFilters();
+		filters.updateActivityName(query);
+		StateContainer.setFilters(filters);
 		return;
 	}
 
@@ -72,9 +73,6 @@
 
 	protected override void OnInitialized()
 	{
-		activities = StateContainer.getActivities(location, minPrice, maxPrice, people, rating, minAge, maxAge, category,
-		adultsOnly, childFriendly);
-
 		if (category == String.Empty)
 			category = null;
 		if (minPrice == -1)
@@ -89,5 +87,10 @@
 			minAge = null;
 		if (maxAge == -1)
 			maxAge = null;
+		StateContainer.OnChange += StateHasChanged;
+	}
+	public void Dispose()
+	{
+		StateContainer.OnChange -= StateHasChanged;
 	}
 }
