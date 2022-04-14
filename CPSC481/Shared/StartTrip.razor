@@ -10,12 +10,14 @@
 				<input type="text" @bind="name"
 					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
 					placeholder="name..." />
+				<p class="text-red text-md font-medium">@nameError</p>
 			</div>
 			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
 				<p class="text-black text-xl font-medium">City:</p>
 				<input type="text" @bind="city"
 					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
 					placeholder="city..." />
+				<p class="text-red text-md font-medium">@cityError</p>
 			</div>
 		</div>
 		<div class="flex flex-row justify-between items-center w-2/3">
@@ -23,11 +25,13 @@
 				<p class="text-black text-xl font-medium">From:</p>
 				<RadzenDatePicker @bind-Value=@from DateFormat="MM-dd-yyyy"
 					class="w-full p-2 focus:outline-none text-xl border-black border-2 rounded" />
+				<p class="text-red text-md font-medium">@startError</p>
 			</div>
 			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
 				<p class="text-black text-xl font-medium">To:</p>
 				<RadzenDatePicker @bind-Value=@to DateFormat="MM-dd-yyyy"
 					class="w-full p-2 focus:outline-none text-xl border-black border-2 rounded" />
+				<p class="text-red text-md font-medium">@endError</p>
 			</div>
 		</div>
 		<button class="p-3 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream"
@@ -59,11 +63,11 @@
 		else
 			cityError = null;
 		if (from > to)
-			startError = "Start date must be before end date";
+			startError = "Start date must be before end";
 		else
 			startError = null;
 		if (from == to)
-			endError = "Start date must be before end date";
+			endError = "Start date must be before end";
 		else
 			endError = null;
 
