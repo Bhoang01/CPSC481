@@ -41,7 +41,7 @@
 		</div>
 		<div class="w-full flex justify-end items-end pb-[1.25rem]">
 			<button
-				class="w-full h-12 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-secondary"
+				class="w-full h-12 rounded @(missingInfo != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-secondary"
 				@onclick="login">Login</button>
 		</div>
 	</div>
@@ -64,6 +64,7 @@
 	private string? passwordError = null;
 	private string? formError = null;
 	private string? reRoute;
+	private bool? missingInfo = null;
 	private void login()
 	{
 		if (email.Length < 1)
@@ -94,6 +95,10 @@
 			{
 				formError = error;
 			}
+		}
+		else
+		{
+			missingInfo = true;
 		}
 	}
 }

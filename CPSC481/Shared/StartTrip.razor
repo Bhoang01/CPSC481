@@ -34,7 +34,7 @@
 				<p class="text-red text-md font-medium">@endError</p>
 			</div>
 		</div>
-		<button class="p-3 w-1/4 rounded bg-blue hover:bg-blue2 transition-all text-center text-xl text-cream"
+		<button class="p-3 w-1/4 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-cream"
 			@onclick="submit">Start
 			Trip</button>
 	</div>
@@ -51,6 +51,7 @@
 	string name = String.Empty, city = String.Empty;
 	DateTime from = DateTime.Today, to = DateTime.Today;
 	string? nameError, cityError, startError, endError;
+	private bool? formError = null;
 
 	public void submit()
 	{
@@ -63,18 +64,34 @@
 		else
 			cityError = null;
 		if (from > to)
+		{
 			startError = "Start date must be before end";
+			endError = "End date must be after start";
+		}
 		else
+		{
 			startError = null;
-		if (from == to)
-			endError = "Start date must be before end";
-		else
 			endError = null;
+		}
+		if (from == to)
+		{
+			startError = "Start date must be before end";
+			endError = "End date must be after start";
+		}
+		else
+		{
+			startError = null;
+			endError = null;
+		}
 
 		if (nameError == null && cityError == null && startError == null && endError == null)
 		{
 			StateContainer.addTrip(name, from, to, city);
 			NavManager.NavigateTo("/trips");
+		}
+		else
+		{
+			formError = true;
 		}
 	}
 }

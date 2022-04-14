@@ -1,4 +1,5 @@
 @inject CPSC481.Classes.StateContainer StateContainer
+@inject NavigationManager NavManager
 
 <div
 	class="bg-cream text-base z-50 p-2 list-none rounded select-none border-2 w-48 @(isOpen ? "mt-40 border-black shadow-xl" : "border-cream")">
@@ -57,6 +58,6 @@
 		bool success = StateContainer.logout();
 		if (success)
 			isOpen = false;
-
+			NavManager.NavigateTo("/");
 	}
 }

@@ -89,7 +89,7 @@
 			</div>
 			<div class="w-full flex justify-end items-end pb-[1.25rem]">
 				<button
-					class="w-full h-12 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-secondary"
+					class="w-full h-12 rounded @(missingInfo != null? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-secondary"
 					@onclick="signup">Sign Up</button>
 			</div>
 		</div>
@@ -117,6 +117,8 @@
 	private string confirmPassword { get; set; } = String.Empty;
 	private string? confirmPasswordError = null;
 	private string? formError = null;
+	private bool? missingInfo = null;
+
 	private void signup()
 	{
 		if (firstName.Length < 1)
@@ -174,7 +176,12 @@
 			else
 			{
 				formError = error;
+				missingInfo = true;
 			}
+		}
+		else
+		{
+			missingInfo = true;
 		}
 	}
 }
