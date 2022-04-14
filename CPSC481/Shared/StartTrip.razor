@@ -34,7 +34,8 @@
 				<p class="text-red text-md font-medium">@endError</p>
 			</div>
 		</div>
-		<button class="p-3 w-1/4 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-cream"
+		<button
+			class="p-3 w-1/4 rounded @(formError != null ? "bg-red hover:bg-red-2" : "bg-primary hover:bg-primary-2") transition-all text-center text-xl text-cream"
 			@onclick="submit">Start
 			Trip</button>
 	</div>
