@@ -90,10 +90,19 @@
 		StateContainer.OnChange += StateHasChanged;
 		formatDates();
 		count = 0;
+
+		if(items.Length==0)
+		{
+			tripsExist = false;
+		}
+		else
+		{
+			tripsExist = true;
+		}
 		if (dates.Count > 0)
 		{
 			date = dates.First();
-			tripsExist = true;
+
 		}
 		getMarkers();
 	}
