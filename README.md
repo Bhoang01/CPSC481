@@ -28,4 +28,9 @@ Zeyad Omran<br>
 - Download itinerary just shows what a sample looks like and does not have accurate data.
 - Emergency page only shows toronto information.
 ## System Walkthrough
+## What we need in README
+- What cases/functions were implemented? 
+- What data should be entered at which times? 
+- To ensure that we don't miss any of the best features of your system you should word your instructions as an exact walkthrough of what should be typed and what controls should be set to what values
+
 
