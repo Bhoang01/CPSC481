@@ -29,7 +29,7 @@
 	else if (step == 0)
 	{
 		<button class=" p-3 rounded bg-primary hover:bg-primary-2 transition-all text-center text-xl text-secondary"
-		@onclick="addToTrip">Add to
+		@onclick="confirm">Add to
 			Trip</button>
 	}
 	@if (step == 1)
@@ -134,7 +134,7 @@
 	bool favorited = false;
 	protected override void OnInitialized()
 	{
-		trips = StateContainer.getTrips();
+		trips = StateContainer.getTrips() ?? Array.Empty<Trip>();
 		favorited = StateContainer.isFavorited(activityId);
 		StateContainer.OnChange += StateHasChanged;
 	}

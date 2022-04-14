@@ -9,13 +9,13 @@
 				<p class="text-black text-xl font-medium">Trip Name:</p>
 				<input type="text" @bind="name"
 					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="Toronto 2022" />
+					placeholder="name..." />
 			</div>
 			<div class="w-2/5 flex flex-col justify-start items-start gap-y-2">
 				<p class="text-black text-xl font-medium">City:</p>
 				<input type="text" @bind="city"
 					class="w-full p-2 focus:outline-none bg-cream text-black text-xl border-black border-2 rounded"
-					placeholder="Toronto" />
+					placeholder="city..." />
 			</div>
 		</div>
 		<div class="flex flex-row justify-between items-center w-2/3">
@@ -50,10 +50,23 @@
 
 	public void submit()
 	{
-		nameError = name.Length < 1 ? "Name is required." : null;
-		cityError = city.Length < 1 ? "City is required." : null;
-		startError = to.CompareTo(from) == 1 ? "Start date must be before End date." : null;
-		endError = from.CompareTo(to) == -1 ? "End date must be after Start date." : null;
+		if (name.Length == 0)
+			nameError = "Name is required";
+		else
+			nameError = null;
+		if (city.Length == 0)
+			cityError = "City is required";
+		else
+			cityError = null;
+		if (from > to)
+			startError = "Start date must be before end date";
+		else
+			startError = null;
+		if (from == to)
+			endError = "Start date must be before end date";
+		else
+			endError = null;
+
 		if (nameError == null && cityError == null && startError == null && endError == null)
 		{
 			StateContainer.addTrip(name, from, to, city);
