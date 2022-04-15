@@ -18,6 +18,8 @@ Zeyad Omran<br>
 
 
 ## System Walkthrough
+NOTE: Do not refresh page during the walkthrough steps & between walkthroughs to maintain session data.
+
 ### Walkthrough #1
 **Step 1: Sign-up <br>**
 Use the top right sign up button to create an account. Once all required data is submitted, you will be logged in and redirected to homescreen. . If any information is missing or incorrect you will be provided error messages.
