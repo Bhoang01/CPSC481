@@ -22,7 +22,7 @@ NOTE: Do not refresh page during the walkthrough steps & between walkthroughs to
 
 ### Walkthrough #1
 **Step 1: Sign-up <br>**
-Use the top right sign up button to create an account. Once all required data is submitted, you will be logged in and redirected to homescreen. . If any information is missing or incorrect you will be provided error messages.
+Use the top right sign up button to create an account. Once all required data is submitted, you will be logged in and redirected to homescreen. If any information is missing or incorrect you will be provided error messages.
 
 **Step 2: Start Trip <br>**
 Once on homescreen, click the "Start Your Trip" button on the top in order to set up an itinerary. Enter the following information:
@@ -48,7 +48,7 @@ Once trip is added, hit the back bottom on the top left above the activity image
 Now let's find a food location, hit the "food" category in the filters. You will find "Hothouse". Click the card and click "Favourite" to add later if you don't find other locations you like as much. 
 
 **Step 8: Search <br>**
-Next hit the back bottom on the top left above the activity image to continue the search for activities with the last filter applied. Now let's find a ladnmark location, click the "landmark" category. You will find "CN Tower". Click the card to view and follow above step 5 to add to trip on Jan 1, 2021 at 8:15pm.  
+Next hit the back bottom on the top left above the activity image to continue the search for activities with the last filter applied. Now let's find a landmark location, click the "landmark" category. You will find "CN Tower". Click the card to view and follow above step 5 to add to trip on Jan 1, 2021 at 8:15pm.  
 
 **Step 9: Go to Favourites <br>**
 Once it's added, go to your favourites to add "Hothouse" as you think it would be the perfect spot with your current activities. Click the dropdown menu by your username on the top right of the screen. Click "Favourites" option and click "Hothouse". Follow step 5 to add to trip on Jan 1, 2021 at 6:00pm.  
