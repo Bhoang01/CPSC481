@@ -20,26 +20,63 @@ Zeyad Omran<br>
 ## System Walkthrough
 ### Walkthrough #1
 Step 1: Sign-up <br>
-Use the top right sign up button to create an account. Once all required data is submitted, you will be logged in and redirected to homescreen.
+Use the top right sign up button to create an account. Once all required data is submitted, you will be logged in and redirected to homescreen. . If any information is missing or incorrect you will be provided error messages.
 
 Step 2: Start Trip <br>
 Once on homescreen, click the "Start Your Trip" button on the top in order to set up an itinerary. Enter the following information:
-- Trip name: Toronto 2021
+- Trip Name: Toronto 2021
 - City: Toronto
 - From: Jan 1, 2021
 - To: Jan 2, 2021
-Once all data is entered, click "Start Trip". You will be able to view all trips created in your account.
+Once all data is entered, click "Start Trip". If any information is missing you will be provided error messages. Once submission is successful, you will be able to view all trips created in your account. If you click on your newly created trip, you will find the itinerary to be empty with a message to add activities.
 
 Step 3: Search Acitivites <br>
 You can now click on the Bookie logo on the top left to navigate to homescreen and begin your search. In the search bar, type "Toronto" and hit the search button. You will be directed to the activites screen with the city set to Toronto on the left panel.  
 
-Step 4: <br>
+Step 4: Filter & Select Acitivity <br>
+You can use the filter on the left pane to select the "popular" tag. Proceed to select "Centreville Amusement Park" by clicking the card to view infromation.
 
-Step 5: <br>
+Step 5: Add to trip <br>
+Once on activity page, you can view all the information required, including reviews, rating, price and address. You can add the trip to your trip. Click "Add to Trip" button and choose "Toronto 2021" trip. For date and time, enter Jan 1, 2021 in the date picker and update time value to 1:30 PM using arrows. Click "Next" and "Confirm". 
 
+Step 6: Search Acitivites <br>
+Once trip is added, hit the back bottom on the top left above the activity image to continue the search for activities with the last filter applied. 
+
+Step 7: Favourite <br>
+Now let's find a food location, hit the "food" category in the filters. You will find "Hothouse". Click the card and click "Favourite" to add later if you don't find other locations you like as much. 
+
+Step 8: Search <br>
+Next hit the back bottom on the top left above the activity image to continue the search for activities with the last filter applied. Now let's find a ladnmark location, click the "landmark" category. You will find "CN Tower". Click the card to view and follow above step 5 to add to trip on Jan 1, 2021 at 8:15pm.  
+
+Step 9: Go to Favourites <br>
+Once it's added, go to your favourites to add "Hothouse" as you think it would be the perfect spot with your current activities. Click the dropdown menu by your username on the top right of the screen. Click "Favourites" option and click "Hothouse". Follow step 5 to add to trip on Jan 1, 2021 at 6:00pm.  
+
+Step 10: Browse and Add More Activities to Trip <br>
+You can now click the back button and continue browsing using the different categories. Repeat steps 5-6 to add the following activities:
+- LEGOLAND Discovery Centre (Jan 2, 2021 11:00am)
+- iQ Food Co. (Jan 2, 2021 2:00pm)
+- Art Gallery of Ontario (Jan 2, 2021 4:00pm)
+
+Step 5: View Itinerary Days <br>
+
+
+Step 5: Share <br>
+
+Step 5: Download <br>
+
+Step 5: Sign out <br>
 
 ### Walkthrough #2
+Step 3: Search Acitivites <br>
+You can now click on the Bookie logo on the top left to navigate to homescreen and begin your search. In the search bar, type "Toronto" and hit the search button. You will be directed to the activites screen with the city set to Toronto on the left panel.  
 
+Step 4: Filter and select acitivity <br>
+You can use the filter on the left pane to select the "popular" tag. Proceed to select "Centreville Amusement Park" by clicking the card to view infromation.
+
+Step 5: log in prompt <br>
+
+
+Step 5: Emergency page <br>
 
 
 ## What we need in README
