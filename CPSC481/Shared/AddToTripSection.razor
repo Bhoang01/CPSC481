@@ -70,7 +70,7 @@
 				<RadzenDatePicker @bind-Value=@day DateFormat="MMM dd yyyy" Change=@(() => datePicked())
 				class="w-full focus:outline-none" />
 				<p class="text-md text-black">Time:</p>
-				<RadzenDatePicker @bind-Value=@time ShowTime="true" TimeOnly="true" HourFormat="12" DateFormat="HH:mm"
+				<RadzenDatePicker @bind-Value=@time ShowTime="true" TimeOnly="true" HourFormat="12" MinutesStep="5" DateFormat="HH:mm"
 				class="w-full focus:outline-none" />
 			</div>
 			@if (show)
