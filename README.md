@@ -53,16 +53,10 @@ Next hit the back bottom on the top left above the activity image to continue th
 **Step 9: Go to Favourites <br>**
 Once it's added, go to your favourites to add "Hothouse" as you think it would be the perfect spot with your current activities. Click the dropdown menu by your username on the top right of the screen. Click "Favourites" option and click "Hothouse". Follow step 5 to add to trip on Jan 1, 2021 at 6:00pm.  
 
-**Step 10: Browse and Add More Activities to Trip <br>**
-You can now click the back button and continue browsing using the different categories. Repeat steps 5-6 to add the following activities:
-- LEGOLAND Discovery Centre (Jan 2, 2021 11:00am)
-- iQ Food Co. (Jan 2, 2021 2:00pm)
-- Art Gallery of Ontario (Jan 2, 2021 4:00pm)
-
-**Step 11: View Itinerary Days <br>**
+**Step 10: View Itinerary Days <br>**
 After all activities are added, you can view your final itinerary by using the drop down menu on the top right by your username. Click "Your Trips" and then on "Toronto 2021" trip click "View Itinerary". You will be able to view the itinerary of each day and the map of the locations.
 
-**Step 12: Share <br>**
+**Step 11: Share <br>**
 You may wish to share the trip with friends. This can be done in two ways. First option is to download the PDF of the trip by clicking the "Download" button. Another option is by clicking the "share" button redirects you to the URL of the trip without being signed-in to share with friends.
 
 ### Walthrough #2
