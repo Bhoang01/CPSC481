@@ -1,0 +1,10 @@
+#!/bin/sh
+# staged-token-limit: preserve existing hooks and check the final index.
+set -eu
+root=$(git rev-parse --show-toplevel)
+node "$root/scripts/git-hooks/check-staged-file-size.mjs"
+previous="$(git rev-parse --git-common-dir)/hooks/pre-commit.before-token-limit"
+if [ -x "$previous" ]; then
+  "$previous" "$@"
+fi
+exec node "$root/scripts/git-hooks/check-staged-file-size.mjs"
